@@ -81,7 +81,7 @@ export default function ContactSection() {
     };
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     
@@ -490,7 +490,7 @@ export default function ContactSection() {
                     
                     <p className="mb-8 text-lg opacity-90">
                       Currently accepting new projects and opportunities.
-                      Let's collaborate and create something extraordinary together!
+                      Let&#44;s collaborate and create something extraordinary together!
                     </p>
                     
                     <motion.div

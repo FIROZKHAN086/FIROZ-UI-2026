@@ -469,13 +469,10 @@ export default function ProjectsSection() {
           }>
             
             <AnimatePresence mode="wait">
-              {filteredProjects.map((project, index) => (
+              {filteredProjects.map((project) => (
                 <ProjectCard
                   key={project.id}
                   project={project}
-                  index={index}
-                  viewMode={viewMode}
-                  theme={theme}
                 />
               ))}
             </AnimatePresence>
@@ -534,8 +531,8 @@ export default function ProjectsSection() {
                     </span>
                   </h3>
                   <p className={`text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-                    Let's collaborate on your next digital masterpiece. Whether it's a complex web application, 
-                    innovative AI solution, or seamless mobile experience - I'm ready to bring your vision to life.
+                    Let&apos;s collaborate on your next digital masterpiece. Whether it&apos;s a complex web application, 
+                    innovative AI solution, or seamless mobile experience - I&apos;m ready to bring your vision to life.
                   </p>
                 </div>
                 

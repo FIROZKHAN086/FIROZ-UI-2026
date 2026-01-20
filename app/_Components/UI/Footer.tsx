@@ -23,7 +23,7 @@ export default function Footer() {
 
   const [email, setEmail] = useState<string>("");
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [hoveredLink, setHoveredLink] = useState<number | null>(null);
 
   
   
@@ -79,8 +79,22 @@ export default function Footer() {
     { label: "Disclaimer", href: "/disclaimer" },
   ];
 
+  type ThemeConfig = {
+  bg: string;
+  card: string;
+  border: string;
+  textPrimary: string;
+  textSecondary: string;
+  textMuted: string;
+  accent: string;
+  accentHover: string;
+  gradientBorder: string;
+  shadow: string;
+  overlay: string;
+};
+
   
-  const themes:Record<ThemeName, any> = {
+  const themes:Record<ThemeName, ThemeConfig> = {
     dark: {
       bg: "bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950",
       card: "bg-gradient-to-br from-gray-900/80 to-gray-800/80",

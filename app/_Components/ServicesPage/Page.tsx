@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect,  useRef,  useState } from "react";
-import { AnimatePresence, motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
+import React, { JSX, useEffect,  useRef,  useState } from "react";
+import { AnimatePresence, motion, useMotionValue, useTransform, animate, useInView, easeOut, easeInOut,  spring } from "framer-motion";
 import { 
   Code, 
   Server, 
@@ -68,19 +68,26 @@ const CountUp = ({ value, duration = 2 }: CountUpProps) => {
   return <motion.span ref={ref} className="text-4xl font-bold">{rounded}</motion.span>;
 };
 
+type Service = {
+  title: string;
+  description: string;
+  icon: JSX.Element;
+  color: string;
+  darkColor: string;
+  gradient: string;
+  borderColor: string;
+  stats: string[];
+  features: string[];
+};
+
 export function ServicesPage() {
-  const [active, setActive] = useState(null);
-  const [hoveredService, setHoveredService] = useState(null);
-  const [mounted, setMounted] = useState(false);
-  const ref = useRef(null);
+  const [active, setActive] = useState<Service | null |boolean>(null);
+  const [hoveredService, setHoveredService] = useState<null | number>(null);
+  const ref = useRef<null>(null);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    function onKeyDown(event) {
+    function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setActive(false);
       }
@@ -216,7 +223,7 @@ export function ServicesPage() {
       transition: {
         duration: 3,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: easeInOut
       }
     }
   };
@@ -230,7 +237,7 @@ export function ServicesPage() {
       transition: {
         delay: i * 0.1,
         duration: 0.6,
-        ease: "easeOut"
+        ease: easeOut
       }
     }),
     hover: {
@@ -238,7 +245,7 @@ export function ServicesPage() {
       scale: 1.03,
       transition: {
         duration: 0.3,
-        ease: "easeInOut"
+        ease: easeInOut
       }
     }
   };
@@ -250,7 +257,7 @@ export function ServicesPage() {
       scale: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: spring,
         stiffness: 100,
         damping: 20
       }
@@ -264,8 +271,6 @@ export function ServicesPage() {
       }
     }
   };
-
-  if (!mounted) return null;
 
   return (
     <section 
@@ -536,20 +541,20 @@ export function ServicesPage() {
                     <div className="flex items-center gap-4">
                       <motion.div
                         whileHover={{ rotate: 360 }}
-                        className={`p-3 rounded-xl bg-gradient-to-br ${active.color} shadow-lg`}
+                        className={`p-3 rounded-xl bg-gradient-to-br ${(active as typeof services[0]).color} shadow-lg`}
                       >
                         <div className="text-white">
-                          {active.icon}
+                          {(active as typeof services[0]).icon}
                         </div>
                       </motion.div>
                       <div>
                         <h3 className={`text-2xl font-bold
                           ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}
                         >
-                          {active.title}
+                          {(active as typeof services[0]).title}
                         </h3>
                         <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
-                          {active.description}
+                          {(active as typeof services[0]).description}
                         </p>
                       </div>
                     </div>
@@ -579,7 +584,7 @@ export function ServicesPage() {
                     </h4>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {active.features.map((feature, index) => (
+                      {(active as typeof services[0]).features.map((feature, index) => (
                         <motion.div
                           key={index}
                           initial={{ opacity: 0, x: -20 }}
@@ -610,7 +615,7 @@ export function ServicesPage() {
                       Technologies I Use
                     </h4>
                     <div className="flex flex-wrap gap-3">
-                      {active.stats.map((tech, index) => (
+                      {(active as typeof services[0]).stats.map((tech, index) => (
                         <motion.span
                           key={index}
                           whileHover={{ scale: 1.05, y: -2 }}
@@ -658,7 +663,7 @@ export function ServicesPage() {
                           document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' });
                           setActive(null);
                         }}
-                        className={`px-6 py-3 rounded-xl font-bold bg-gradient-to-r ${active.color} text-white shadow-lg`}
+                        className={`px-6 py-3 rounded-xl font-bold bg-gradient-to-r ${(active as typeof services[0]).color} text-white shadow-lg`}
                       >
                         Start Project
                       </motion.button>

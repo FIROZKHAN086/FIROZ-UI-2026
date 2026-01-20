@@ -23,9 +23,7 @@ export function EditProjectDialog(props: EditProjectDialogProps) {
   return (
     <NewProjectDialog
       {...props}
-      title="Edit Project"
-      description="Update your project details below."
-      submitLabel="Update Project"
+     
     />
   );
 }

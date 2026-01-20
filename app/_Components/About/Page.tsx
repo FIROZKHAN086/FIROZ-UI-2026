@@ -16,8 +16,8 @@ import { AboutC } from './AboutC';
 
 export default function AboutMe() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const sectionRef = useRef(null);
 
   const isDark = theme === 'dark';
@@ -88,7 +88,7 @@ export default function AboutMe() {
     { word: 'robust', color: 'bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent' },
   ];
 
-  const renderHighlightedText = (text) => {
+  const renderHighlightedText = (text:string) => {
     let result = text;
     highlightWords.forEach(({ word, color }) => {
       const regex = new RegExp(`\\b${word}\\b`, 'gi');
@@ -403,7 +403,7 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
           <h3 className={`text-3xl font-bold mb-6 ${
             isDark ? 'text-white' : 'text-gray-900'
           }`}>
-            Let's Build Something{' '}
+            Let&#44;s Build Something{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
               Amazing Together
             </span>

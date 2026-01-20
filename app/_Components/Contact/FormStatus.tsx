@@ -3,10 +3,17 @@ import { motion } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { MdCheckCircle, MdError } from "react-icons/md";
 import { gsap } from "gsap";
-type FormStatusProps = {
-  status: 'success' | 'error' | null;
-  message: string;
-};
+export type FormStatusType =
+  | "success"
+  | "error"
+  | "sending"
+  | null;
+
+interface FormStatusProps {
+  status: FormStatusType;
+  message?: string;
+}
+
 
 
 

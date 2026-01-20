@@ -319,7 +319,7 @@ const successRate =
                   </div>
 
                   <p className={`mb-4 leading-relaxed ${currentTheme.textSecondary}`}>
-                    "{t.message}"
+                    &quot;{t.message}&quot;
                   </p>
 
                   <div className={`text-xs flex items-center justify-between ${currentTheme.textSecondary}`}>

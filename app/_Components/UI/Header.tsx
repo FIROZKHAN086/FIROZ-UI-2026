@@ -140,7 +140,7 @@ const ThemeToggle = () => {
 
 
 const TechStack = () => {
-  const [hoveredTech, setHoveredTech] = useState(null);
+  const [hoveredTech, setHoveredTech] = useState<number | null>(null);
   const techs = [
     { icon: SiNextdotjs, label: "Next.js", color: "text-gray-800 dark:text-white" },
     { icon: SiTypescript, label: "TypeScript", color: "text-blue-600 dark:text-blue-400" },
@@ -200,14 +200,14 @@ const TechStack = () => {
 
 
 type NavLinkProps = {
-    to:string;
+    to?: string;
     label:string;
     scrollTo?: () => void;
     icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
 const NavLink = ({ to, label, scrollTo, icon: Icon }:NavLinkProps) => {
-  const isActive = location.pathname === to;
+  const isActive = to ? location.pathname === to : false;
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -291,7 +291,9 @@ const NavLink = ({ to, label, scrollTo, icon: Icon }:NavLinkProps) => {
                 ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600"
                 : "text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
               }`}>
-             <Link href={to}>{label}</Link>
+                
+             <Link href={to ?? "/"}>{label}</Link>
+
             </span>
             
             {/* Active/Hover indicator */}
@@ -311,8 +313,13 @@ const NavLink = ({ to, label, scrollTo, icon: Icon }:NavLinkProps) => {
   );
 };
 
-/* -------------------- Social Icon Button -------------------- */
-const SocialIcon = ({ icon: Icon, href, label }) => {
+type SocialIconProps = {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  href: string;
+  label: string;
+};
+
+const SocialIcon = ({ icon: Icon, href, label }:SocialIconProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -786,7 +793,6 @@ export default function Header() {
                     <SocialIcon
                       key={link.label}
                       {...link}
-                      className="!w-10 !h-10"
                     />
                   ))}
                 </div>

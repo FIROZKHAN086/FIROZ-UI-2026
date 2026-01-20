@@ -146,6 +146,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       title: formData.title.trim(),
       description: formData.description.trim(),
       image: formData.image,
+      tech: formData.tech,
       liveDemo: formData.liveDemo.trim(),
       github: formData.github.trim(),
       category: formData.category.trim(),
@@ -279,7 +280,10 @@ const handleSubmit = async (e: React.FormEvent) => {
         <ProjectGrid
           projects={filteredProjects}
           onEdit={handleEdit}
-          onDelete={handleDeleteClick}
+          onDelete={(id: string) => {
+            const project = projects.find(p => p.id === id);
+            if (project) handleDeleteClick(project);
+          }}
           onDuplicate={handleDuplicate}
         />
       </main>
@@ -291,7 +295,9 @@ const handleSubmit = async (e: React.FormEvent) => {
         formData={formData}
         updateFormData={updateFormData}
         uploading={uploading}
-        onFileSelect={handleFileChange}
+        onFileSelect={async (file: File) => {
+          await handleFileChange(file);
+        }}
         onSubmit={handleSubmit}
         onCancel={() => {
           setNewDialogOpen(false);
@@ -312,7 +318,9 @@ const handleSubmit = async (e: React.FormEvent) => {
         formData={formData}
         updateFormData={updateFormData}
         uploading={uploading}
-        onFileSelect={handleFileChange}
+        onFileSelect={async (file: File) => {
+          await handleFileChange(file);
+        }}
         onSubmit={handleSubmit}
         onCancel={() => {
           setEditDialogOpen(false);

@@ -72,8 +72,20 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     return colors[Math.floor(Math.random() * colors.length)];
   };
   
+  type ThemeConfig = {
+  bg: string;
+  card: string;
+  border: string;
+  textPrimary: string;
+  textSecondary: string;
+  accent: string;
+  inputBg: string;
+  shadow: string;
+  glow: string;
+};
 
-  const themes:Record<ThemeName, any> = {
+
+  const themes:Record<ThemeName, ThemeConfig> = {
     dark: {
         bg: "bg-black",
         card: "bg-gray-900/90 backdrop-blur-md",
@@ -345,7 +357,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 </h4>
                 <div className={`p-4 rounded-xl ${currentTheme.inputBg} italic`}>
                   <p className={`text-sm ${currentTheme.textSecondary} mb-2`}>
-                    "Working with [Name] was exceptional. They delivered our e-commerce platform 2 weeks ahead of schedule with flawless performance. Their attention to detail and problem-solving skills are top-notch!"
+                    &quot;Working with [Name] was exceptional. They delivered our e-commerce platform 2 weeks ahead of schedule with flawless performance. Their attention to detail and problem-solving skills are top-notch!&quot;
                   </p>
                   <div className="flex items-center justify-between mt-4">
                     <span className="text-sm text-purple-400">- Satisfied Client</span>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, easeInOut } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from 'next-themes';
@@ -93,9 +93,169 @@ import { BiLogoVisualStudio } from "react-icons/bi";
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
+// Enhanced expertise data
+const expertiseData = {
+  frontend: {
+    title: 'Frontend Engineering',
+    description: 'Crafting immersive, performant user experiences with modern frameworks',
+    icon: <Code2 className="w-6 h-6" />,
+    gradient: 'from-blue-500 via-cyan-500 to-teal-500',
+    technologies: [
+      {
+        name: 'React.js',
+        level: 'Expert',
+        experience: '3 Years',
+        description: 'Building interactive UIs with modern patterns & hooks',
+        projects: '30+ Projects',
+        icon: <SiReact className="w-5 h-5" />,
+        color: '#61DAFB',
+        category: 'Library',
+        features: ['Hooks', 'Context', 'Performance', 'Testing']
+      },
+      {
+        name: 'Next.js',
+        level: 'Advanced',
+        experience: '2.5 Years',
+        description: 'Full-stack framework with SSR, SSG, and App Router',
+        projects: '25+ Projects',
+        icon: <SiNextdotjs className="w-5 h-5" />,
+        color: '#000000',
+        category: 'Framework',
+        features: ['SSR/SSG', 'API Routes', 'Middleware', 'Optimizations']
+      },
+      {
+        name: 'TypeScript',
+        level: 'Advanced',
+        experience: '2 Years',
+        description: 'Type-safe JavaScript for scalable applications',
+        projects: '20+ Projects',
+        icon: <SiTypescript className="w-5 h-5" />,
+        color: '#3178C6',
+        category: 'Language',
+        features: ['Type Safety', 'Interfaces', 'Generics', 'Tooling']
+      },
+      {
+        name: 'Tailwind CSS',
+        level: 'Expert',
+        experience: '3 Years',
+        description: 'Utility-first CSS framework for rapid UI development',
+        projects: '40+ Projects',
+        icon: <SiTailwindcss className="w-5 h-5" />,
+        color: '#06B6D4',
+        category: 'CSS Framework',
+        features: ['Utility First', 'Responsive', 'Customization', 'Plugins']
+      }
+    ]
+  },
+  backend: {
+    title: 'Backend Development',
+    description: 'Building robust, scalable server-side architectures and APIs',
+    icon: <Server className="w-6 h-6" />,
+    gradient: 'from-emerald-500 via-green-500 to-teal-500',
+    technologies: [
+      {
+        name: 'Node.js',
+        level: 'Advanced',
+        experience: '3 Years',
+        description: 'JavaScript runtime for scalable network applications',
+        projects: '25+ Projects',
+        icon: <SiNodedotjs className="w-5 h-5" />,
+        color: '#339933',
+        category: 'Runtime',
+        features: ['Event Loop', 'NPM', 'Async', 'Streams']
+      },
+      {
+        name: 'Express.js',
+        level: 'Advanced',
+        experience: '2.5 Years',
+        description: 'Fast, unopinionated web framework for Node.js',
+        projects: '20+ Projects',
+        icon: <SiExpress className="w-5 h-5" />,
+        color: '#000000',
+        category: 'Framework',
+        features: ['Routing', 'Middleware', 'Security', 'REST APIs']
+      },
+      {
+        name: 'MongoDB',
+        level: 'Intermediate',
+        experience: '2 Years',
+        description: 'NoSQL database for modern applications',
+        projects: '15+ Projects',
+        icon: <SiMongodb className="w-5 h-5" />,
+        color: '#47A248',
+        category: 'Database',
+        features: ['Document Model', 'Aggregation', 'Indexing', 'Atlas']
+      },
+      {
+        name: 'PostgreSQL',
+        level: 'Intermediate',
+        experience: '1.5 Years',
+        description: 'Powerful open-source relational database',
+        projects: '12+ Projects',
+        icon: <SiPostgresql className="w-5 h-5" />,
+        color: '#336791',
+        category: 'Database',
+        features: ['ACID', 'JSONB', 'Extensions', 'Performance']
+      }
+    ]
+  },
+  devops: {
+    title: 'DevOps & Tools',
+    description: 'Development workflow, deployment, and collaboration tools',
+    icon: <Terminal className="w-6 h-6" />,
+    gradient: 'from-amber-500 via-orange-500 to-red-500',
+    technologies: [
+      {
+        name: 'Docker',
+        level: 'Intermediate',
+        experience: '1.5 Years',
+        description: 'Containerization platform for consistent environments',
+        projects: '10+ Projects',
+        icon: <SiDocker className="w-5 h-5" />,
+        color: '#2496ED',
+        category: 'Container',
+        features: ['Containers', 'Images', 'Compose', 'Dockerfile']
+      },
+      {
+        name: 'Git & GitHub',
+        level: 'Expert',
+        experience: '3 Years',
+        description: 'Version control and collaborative development',
+        projects: 'All Projects',
+        icon: <SiGithub className="w-5 h-5" />,
+        color: '#181717',
+        category: 'Version Control',
+        features: ['CI/CD', 'Actions', 'PRs', 'Collaboration']
+      },
+      {
+        name: 'Vercel',
+        level: 'Advanced',
+        experience: '2 Years',
+        description: 'Cloud platform for static sites and Serverless Functions',
+        projects: '20+ Projects',
+        icon: <SiVercel className="w-5 h-5" />,
+        color: '#000000',
+        category: 'Deployment',
+        features: ['Edge Functions', 'Preview', 'Analytics', 'Speed']
+      },
+      {
+        name: 'Figma',
+        level: 'Intermediate',
+        experience: '2 Years',
+        description: 'Design and prototyping tool for UI/UX',
+        projects: '15+ Projects',
+        icon: <SiFigma className="w-5 h-5" />,
+        color: '#F24E1E',
+        category: 'Design',
+        features: ['Prototyping', 'Components', 'Collaboration', 'Plugins']
+      }
+    ]
+  }
+};
+type ExpertiseKey = keyof typeof expertiseData;
 
  export const AboutC = () => {
-  const [activeCategory, setActiveCategory] = useState('frontend');
+  const [activeCategory, setActiveCategory] = useState<ExpertiseKey>('frontend');
   const [hoveredTech, setHoveredTech] = useState(null);
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
@@ -184,7 +344,7 @@ if (typeof window !== 'undefined') {
       transition: {
         duration: 3,
         repeat: Infinity,
-        ease: 'easeInOut'
+        ease: easeInOut
       }
     }
   };
@@ -240,165 +400,6 @@ if (typeof window !== 'undefined') {
     },
   ];
 
-  // Enhanced expertise data
-  const expertiseData = {
-    frontend: {
-      title: 'Frontend Engineering',
-      description: 'Crafting immersive, performant user experiences with modern frameworks',
-      icon: <Code2 className="w-6 h-6" />,
-      gradient: 'from-blue-500 via-cyan-500 to-teal-500',
-      technologies: [
-        {
-          name: 'React.js',
-          level: 'Expert',
-          experience: '3 Years',
-          description: 'Building interactive UIs with modern patterns & hooks',
-          projects: '30+ Projects',
-          icon: <SiReact className="w-5 h-5" />,
-          color: '#61DAFB',
-          category: 'Library',
-          features: ['Hooks', 'Context', 'Performance', 'Testing']
-        },
-        {
-          name: 'Next.js',
-          level: 'Advanced',
-          experience: '2.5 Years',
-          description: 'Full-stack framework with SSR, SSG, and App Router',
-          projects: '25+ Projects',
-          icon: <SiNextdotjs className="w-5 h-5" />,
-          color: '#000000',
-          category: 'Framework',
-          features: ['SSR/SSG', 'API Routes', 'Middleware', 'Optimizations']
-        },
-        {
-          name: 'TypeScript',
-          level: 'Advanced',
-          experience: '2 Years',
-          description: 'Type-safe JavaScript for scalable applications',
-          projects: '20+ Projects',
-          icon: <SiTypescript className="w-5 h-5" />,
-          color: '#3178C6',
-          category: 'Language',
-          features: ['Type Safety', 'Interfaces', 'Generics', 'Tooling']
-        },
-        {
-          name: 'Tailwind CSS',
-          level: 'Expert',
-          experience: '3 Years',
-          description: 'Utility-first CSS framework for rapid UI development',
-          projects: '40+ Projects',
-          icon: <SiTailwindcss className="w-5 h-5" />,
-          color: '#06B6D4',
-          category: 'CSS Framework',
-          features: ['Utility First', 'Responsive', 'Customization', 'Plugins']
-        }
-      ]
-    },
-    backend: {
-      title: 'Backend Development',
-      description: 'Building robust, scalable server-side architectures and APIs',
-      icon: <Server className="w-6 h-6" />,
-      gradient: 'from-emerald-500 via-green-500 to-teal-500',
-      technologies: [
-        {
-          name: 'Node.js',
-          level: 'Advanced',
-          experience: '3 Years',
-          description: 'JavaScript runtime for scalable network applications',
-          projects: '25+ Projects',
-          icon: <SiNodedotjs className="w-5 h-5" />,
-          color: '#339933',
-          category: 'Runtime',
-          features: ['Event Loop', 'NPM', 'Async', 'Streams']
-        },
-        {
-          name: 'Express.js',
-          level: 'Advanced',
-          experience: '2.5 Years',
-          description: 'Fast, unopinionated web framework for Node.js',
-          projects: '20+ Projects',
-          icon: <SiExpress className="w-5 h-5" />,
-          color: '#000000',
-          category: 'Framework',
-          features: ['Routing', 'Middleware', 'Security', 'REST APIs']
-        },
-        {
-          name: 'MongoDB',
-          level: 'Intermediate',
-          experience: '2 Years',
-          description: 'NoSQL database for modern applications',
-          projects: '15+ Projects',
-          icon: <SiMongodb className="w-5 h-5" />,
-          color: '#47A248',
-          category: 'Database',
-          features: ['Document Model', 'Aggregation', 'Indexing', 'Atlas']
-        },
-        {
-          name: 'PostgreSQL',
-          level: 'Intermediate',
-          experience: '1.5 Years',
-          description: 'Powerful open-source relational database',
-          projects: '12+ Projects',
-          icon: <SiPostgresql className="w-5 h-5" />,
-          color: '#336791',
-          category: 'Database',
-          features: ['ACID', 'JSONB', 'Extensions', 'Performance']
-        }
-      ]
-    },
-    devops: {
-      title: 'DevOps & Tools',
-      description: 'Development workflow, deployment, and collaboration tools',
-      icon: <Terminal className="w-6 h-6" />,
-      gradient: 'from-amber-500 via-orange-500 to-red-500',
-      technologies: [
-        {
-          name: 'Docker',
-          level: 'Intermediate',
-          experience: '1.5 Years',
-          description: 'Containerization platform for consistent environments',
-          projects: '10+ Projects',
-          icon: <SiDocker className="w-5 h-5" />,
-          color: '#2496ED',
-          category: 'Container',
-          features: ['Containers', 'Images', 'Compose', 'Dockerfile']
-        },
-        {
-          name: 'Git & GitHub',
-          level: 'Expert',
-          experience: '3 Years',
-          description: 'Version control and collaborative development',
-          projects: 'All Projects',
-          icon: <SiGithub className="w-5 h-5" />,
-          color: '#181717',
-          category: 'Version Control',
-          features: ['CI/CD', 'Actions', 'PRs', 'Collaboration']
-        },
-        {
-          name: 'Vercel',
-          level: 'Advanced',
-          experience: '2 Years',
-          description: 'Cloud platform for static sites and Serverless Functions',
-          projects: '20+ Projects',
-          icon: <SiVercel className="w-5 h-5" />,
-          color: '#000000',
-          category: 'Deployment',
-          features: ['Edge Functions', 'Preview', 'Analytics', 'Speed']
-        },
-        {
-          name: 'Figma',
-          level: 'Intermediate',
-          experience: '2 Years',
-          description: 'Design and prototyping tool for UI/UX',
-          projects: '15+ Projects',
-          icon: <SiFigma className="w-5 h-5" />,
-          color: '#F24E1E',
-          category: 'Design',
-          features: ['Prototyping', 'Components', 'Collaboration', 'Plugins']
-        }
-      ]
-    }
-  };
 
   // Development principles
   const principles = [
@@ -860,7 +861,7 @@ if (typeof window !== 'undefined') {
                   key={key}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => setActiveCategory(key)}
+                  onClick={() => setActiveCategory(key as ExpertiseKey)}
                   className={`px-4 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 ${
                     activeCategory === key
                       ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg`
@@ -919,7 +920,7 @@ if (typeof window !== 'undefined') {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
                         whileHover={{ x: 5 }}
-                        onMouseEnter={() => setHoveredTech(index)}
+                        onMouseEnter={() => setHoveredTech(index as any)}
                         onMouseLeave={() => setHoveredTech(null)}
                         className={`tech-card rounded-2xl p-6 backdrop-blur-sm border transition-all duration-300 cursor-pointer ${
                           isDark 
@@ -1017,7 +1018,7 @@ if (typeof window !== 'undefined') {
                   key={key}
                   whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => setActiveCategory(key)}
+                  onClick={() => setActiveCategory(key as ExpertiseKey)}
                   className={`p-4 rounded-xl backdrop-blur-sm border text-center cursor-pointer transition-all duration-300 ${
                     activeCategory === key
                       ? `bg-gradient-to-r ${category.gradient} text-white shadow-xl`

@@ -14,9 +14,9 @@ import {
   SiMongodb, 
   SiTypescript, 
   SiTailwindcss, 
-  SiGithub,
-  IconType
+  SiGithub
 } from 'react-icons/si';
+import { IconType } from 'react-icons';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 
@@ -568,7 +568,9 @@ const HeroSection = () => {
                 return (
                   <motion.div
                     key={tech.name}
-                    ref={el => orbitRefs.current[index] = el}
+                    ref={(el) => {
+  orbitRefs.current[index] = el;
+}}
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                     animate={{
                       x: [
@@ -878,7 +880,7 @@ const HeroSection = () => {
               : 'bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 border border-blue-200'
             }
           `}>
-            "elegant()"
+            &quot;elegant()&quot;
           </span>
         </div>
         
