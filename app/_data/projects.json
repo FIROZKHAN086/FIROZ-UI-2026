@@ -1,0 +1,154 @@
+[
+  {
+    "id": "proj_d85e27356f1f4e51",
+    "title": "FIROZ-PORTFOLIO",
+    "description": "This is my port folio and this is best adn cool and aniamtion and theme and",
+    "image": "https://res.cloudinary.com/dofqkx3dh/image/upload/v1768893110/portfolio-projects/af8qcs8e72geemin7qsw.jpg",
+    "tech": [
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "React",
+      "Gsap",
+      "Motion",
+      "Axios"
+    ],
+    "liveDemo": "https://firoz-dev.vercel.app/",
+    "github": "https://github.com/FIROZKHAN086",
+    "category": "Web Application",
+    "featured": false,
+    "createdAt": "2026-01-20T07:13:12.804Z",
+    "updatedAt": "2026-01-20T07:13:12.804Z"
+  },
+  {
+    "id": "proj_01g7b3e4f5c8d9a2b",
+    "title": "Chai -churii",
+    "description": "A modern restaurant website with online ordering, table reservation, and admin dashboard. Features user authentication, menu management, and order tracking.",
+    "image": "https://res.cloudinary.com/dofqkx3dh/image/upload/v1768892996/portfolio-projects/csbdrcjtu83ccsw2yd9j.png",
+    "tech": [
+      "Next.js",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Firebase Auth",
+      "Tailwind CSS",
+      "Motion{Animation}"
+    ],
+    "liveDemo": "https://chaa-curi.vercel.app/",
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "category": "Full Stack",
+    "featured": true,
+    "updatedAt": "2026-01-20T07:10:32.186Z"
+  },
+  {
+    "id": "proj_02h8c4f5g6d9e3b7a",
+    "title": "E-commerce Bangles",
+    "description": "A specialized online store for bangles, offering elegant product displays, secure payments, and a smooth user shopping experience.",
+    "image": "/Img/Screenshot (9).png",
+    "tech": [
+      "React",
+      "Gsap"
+    ],
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "liveDemo": "https://r-bangels.vercel.app/",
+    "category": "E-commerce"
+  },
+  {
+    "id": "proj_03i9d5g6h7e0c4b8a",
+    "title": "E-commerce Clothing",
+    "description": "A fashion-forward clothing store with user-friendly navigation, dynamic filtering, and responsive product pages for modern shoppers.",
+    "image": "/Img/Screenshot (12).png",
+    "tech": [
+      "React.js",
+      "Express",
+      "nodejs"
+    ],
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "liveDemo": "https://clothing-rust.vercel.app/",
+    "category": "E-commerce"
+  },
+  {
+    "id": "proj_04j0e6h7i8f1d5c9b",
+    "title": "Full Stack Food App",
+    "description": "An end-to-end food delivery app featuring real-time order tracking, admin panel, secure login, and smooth user experience.",
+    "image": "https://res.cloudinary.com/dofqkx3dh/image/upload/v1768893209/portfolio-projects/wad34mfwfwobipvsfovo.png",
+    "tech": [
+      "React js",
+      "Firebase",
+      "Redux"
+    ],
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "liveDemo": "https://kings-food.vercel.app/",
+    "category": "Full Stack",
+    "featured": false,
+    "updatedAt": "2026-01-20T07:14:04.228Z"
+  },
+  {
+    "id": "proj_05k1f7i8j9g2e6d0c",
+    "title": "Education Real",
+    "description": "An online learning platform offering a vast library of over 185,000 video courses. Features include lifetime access, expert-led instruction, and industry-relevant certifications.",
+    "image": "/Img/Screenshot (32).png",
+    "tech": [
+      "React",
+      "Tailwind CSS"
+    ],
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "liveDemo": "https://education-real.vercel.app/",
+    "category": "Education"
+  },
+  {
+    "id": "proj_06l2g8j9k0h3f7e1d",
+    "title": "Filmy Vila",
+    "description": "A dynamic movie information platform that provides details about various films, including trailers, ratings, and reviews, offering users an immersive cinematic experience.",
+    "image": "/Img/Screenshot (8).png",
+    "tech": [
+      "React.js",
+      "three.js"
+    ],
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "liveDemo": "https://filmy-vila.vercel.app/",
+    "category": "Entertainment"
+  },
+  {
+    "id": "proj_07m3h9k0l1i4g8f2e",
+    "title": "VidGN-AI",
+    "description": "An AI-powered video generation platform that transforms user input into images and voiceovers using Together.ai and TTS, creating engaging video content effortlessly.",
+    "image": "/Img/Screenshot (161).png",
+    "tech": [
+      "Next.js",
+      "Tailwind CSS",
+      "Together.ai",
+      "Cloudinary"
+    ],
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "liveDemo": "https://vidgn-ai.vercel.app/",
+    "category": "AI"
+  },
+  {
+    "id": "proj_08n4i0l1m2j5h9g3f",
+    "title": "AI Firoz",
+    "description": "An AI-powered application that allows users to generate images, upscale, caption, and interact with community-generated content, leveraging advanced AI models.",
+    "image": "/Img/Screenshot (17).png",
+    "tech": [
+      "Next.js",
+      "Tailwind CSS",
+      "AI SDK"
+    ],
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "liveDemo": "https://ai-firoz.vercel.app/",
+    "category": "AI"
+  },
+  {
+    "id": "proj_09o5j1m2n3k6i0h4g",
+    "title": "Zoapto",
+    "description": "A minimalist and responsive website built purely with HTML and CSS, showcasing clean design principles and efficient layout structures.",
+    "image": "/Img/Screenshot (2).png",
+    "tech": [
+      "HTML",
+      "CSS"
+    ],
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "liveDemo": "https://zoapto.netlify.app/",
+    "category": "Web Design"
+  }
+]
