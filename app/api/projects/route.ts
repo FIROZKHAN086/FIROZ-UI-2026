@@ -56,7 +56,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    // Validate required fields
+    // required fields
     if (!body.title || !body.description || !body.category) {
       return NextResponse.json(
         { error: "Missing required fields: title, description, category" },
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
 
     const projects = readProjects();
     
-    // Ensure tech is always an array
+    
     const techArray = Array.isArray(body.tech) ? body.tech : [];
     
     const newProject: Project = {
@@ -102,7 +102,7 @@ export async function OPTIONS() {
   return new NextResponse(null, {
     status: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': 'http://localhost:3000, https://firoz-dev.vercel.app',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },

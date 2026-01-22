@@ -6,7 +6,7 @@ import Header from "./_Components/UI/Header";
 import Footer from "./_Components/UI/Footer";
 import { Cursor } from "./_Components/UI/Cursor";
 import { Toaster } from "react-hot-toast";
-
+import { Analytics } from "@vercel/analytics/next"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -42,7 +42,8 @@ export default function RootLayout({
         <Toaster
   position="top-right"
   reverseOrder={false}
-/>
+/>  
+        <Analytics />
         <Cursor/>
         <Header/>
         {children}

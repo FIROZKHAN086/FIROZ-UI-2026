@@ -1,8 +1,8 @@
 [
-  {
+    {
     "id": "proj_d85e27356f1f4e51",
     "title": "FIROZ-PORTFOLIO",
-    "description": "This is my port folio and this is best adn cool and aniamtion and theme and",
+    "description": "This is my port folio and this is best adn cool and aniamtion and theme and and aniamtion desing",
     "image": "https://res.cloudinary.com/dofqkx3dh/image/upload/v1768893110/portfolio-projects/af8qcs8e72geemin7qsw.jpg",
     "tech": [
       "Next.js",
@@ -18,7 +18,7 @@
     "category": "Web Application",
     "featured": false,
     "createdAt": "2026-01-20T07:13:12.804Z",
-    "updatedAt": "2026-01-20T07:13:12.804Z"
+    "updatedAt": "2026-01-22T05:10:12.211Z"
   },
   {
     "id": "proj_01g7b3e4f5c8d9a2b",
