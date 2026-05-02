@@ -2,11 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useTheme } from "next-themes";
-import { 
-  Sparkles, 
+import {
+  Sparkles,
   Globe,
   Cpu,
   Smartphone,
@@ -29,13 +28,9 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter } from "next/navigation";
 
-// Register GSAP plugins
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-
-
 
 const categories = [
   { id: "all", label: "All Projects", icon: <Layers className="w-4 h-4" />, count: 3 },
@@ -43,9 +38,6 @@ const categories = [
   { id: "AI Platform", label: "AI Platforms", icon: <Cpu className="w-4 h-4" />, count: 1 },
   { id: "Mobile App", label: "Mobile Apps", icon: <Smartphone className="w-4 h-4" />, count: 1 },
 ];
-
-
-// Stats Card Component
 
 type StatsCardProps = {
   icon: React.ReactNode;
@@ -55,78 +47,55 @@ type StatsCardProps = {
 };
 
 const StatsCard = ({ icon, value, label, color }: StatsCardProps) => {
-  const { theme } = useTheme();
-  
-  const isDark = theme === 'dark';
   return (
     <motion.div
       whileHover={{ y: -4 }}
       className="relative group"
     >
-        <span
-        className={`absolute top-3 right-3 z-10 px-2 py-0.5 rounded-full
-        text-[10px] font-semibold tracking-wide
-        ${isDark
-          ? 'bg-yellow-400/10 text-yellow-400 border border-yellow-400/20'
-          : 'bg-yellow-100 text-yellow-700 border border-yellow-300'}
-      `}
-      >
-       hard-coded
-      </span>
-      <Card className="overflow-hidden border-0 backdrop-blur-sm">
+      <Card className="overflow-hidden border-0 backdrop-blur-sm bg-[#111111]/50 border-[#faf8f0]/10">
         <div className="p-6">
-          <div className={`inline-flex p-3 rounded-full mb-4 ${color}`}>
-            <div className="text-white">{icon}</div>
+          <div className={`inline-flex p-3 rounded-full ${color}`}>
+            <div className="text-[#0a0a0a]">{icon}</div>
           </div>
-          <div className={`text-3xl font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+          <div className="text-3xl font-bold mb-2 text-[#faf8f0]">
             {value}
           </div>
-          <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <div className="text-sm text-[#faf8f0]/60">
             {label}
           </div>
         </div>
       </Card>
-      <div className={`absolute inset-0 bg-gradient-to-br from-transparent via-transparent ${
-        theme === 'dark' ? 'to-white/5' : 'to-black/5'
-      } rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#faf8f0]/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
     </motion.div>
   );
 };
 
-// Filter Component
 type FilterTabsProps = {
   activeFilter: string;
   onFilterChange: (value: string) => void;
   viewMode: string;
   onViewModeChange: (mode: string) => void;
 };
+
 const FilterTabs = ({ activeFilter, onFilterChange, viewMode, onViewModeChange }: FilterTabsProps) => {
-  const { theme } = useTheme();
-  
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
-      <Tabs 
-        value={activeFilter} 
+      <Tabs
+        value={activeFilter}
         onValueChange={onFilterChange}
         className="w-full sm:w-auto"
       >
-        <TabsList className="flex-wrap h-auto p-1">
+        <TabsList className="flex-wrap h-auto p-1 bg-[#111111]/50 border border-[#faf8f0]/10">
           {categories.map((category) => (
             <TabsTrigger
               key={category.id}
               value={category.id}
-              className={`relative px-4 py-2 rounded-lg ${
-                theme === 'dark' 
-                  ? 'data-[state=active]:bg-gray-800' 
-                  : 'data-[state=active]:bg-gray-100'
-              }`}
+              className="relative px-4 py-2 rounded-lg data-[state=active]:bg-[#a78bfa]/20"
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 text-[#faf8f0]/70 data-[state=active]:text-[#a78bfa]">
                 {category.icon}
                 <span>{category.label}</span>
-                <span className={`text-xs px-2 py-0.5 rounded-full ${
-                  theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200'
-                }`}>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-[#111111] text-[#faf8f0]/60">
                   {category.count}
                 </span>
               </span>
@@ -134,19 +103,17 @@ const FilterTabs = ({ activeFilter, onFilterChange, viewMode, onViewModeChange }
           ))}
         </TabsList>
       </Tabs>
-      
+
       <div className="flex items-center gap-2">
-        <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} mr-2`}>
+        <span className="text-sm text-[#faf8f0]/60 mr-2">
           View:
         </span>
-        <div className={`flex rounded-lg border ${
-          theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
-        } p-1`}>
+        <div className="flex rounded-lg border border-[#faf8f0]/10 p-1 bg-[#111111]/50">
           <Button
             size="sm"
             variant={viewMode === "grid" ? "secondary" : "ghost"}
             onClick={() => onViewModeChange("grid")}
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 p-0 bg-[#111111] hover:bg-[#a78bfa]/20 text-[#faf8f0]/70"
           >
             <Grid3x3 className="w-4 h-4" />
           </Button>
@@ -154,7 +121,7 @@ const FilterTabs = ({ activeFilter, onFilterChange, viewMode, onViewModeChange }
             size="sm"
             variant={viewMode === "list" ? "secondary" : "ghost"}
             onClick={() => onViewModeChange("list")}
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 p-0 bg-[#111111] hover:bg-[#a78bfa]/20 text-[#faf8f0]/70"
           >
             <List className="w-4 h-4" />
           </Button>
@@ -165,12 +132,11 @@ const FilterTabs = ({ activeFilter, onFilterChange, viewMode, onViewModeChange }
 };
 
 export default function ProjectsSection() {
-  const { theme } = useTheme();
   const [activeFilter, setActiveFilter] = useState("all");
   const [viewMode, setViewMode] = useState("grid");
   const [isMounted, setIsMounted] = useState(false);
   const sectionRef = useRef(null);
-  
+
   const projects = [
     {
       id: 1,
@@ -184,7 +150,7 @@ export default function ProjectsSection() {
       live: "https://chaa-curi.vercel.app/",
       github: "https://github.com/FIROZKHAN086",
       category: "Web Platform",
-      accent: "#8B5CF6",
+      accent: "#a78bfa",
       pattern: "grid",
       stats: {
         performance: "98%",
@@ -211,7 +177,7 @@ export default function ProjectsSection() {
       live: "https://vidgn-ai.vercel.app/",
       github: "https://github.com/FIROZKHAN086",
       category: "AI Platform",
-      accent: "#10B981",
+      accent: "#10b981",
       pattern: "circuit",
       stats: {
         accuracy: "95%",
@@ -238,7 +204,7 @@ export default function ProjectsSection() {
       live: "https://kings-food.vercel.app/",
       github: "https://github.com/FIROZKHAN086",
       category: "Mobile App",
-      accent: "#3B82F6",
+      accent: "#3b82f6",
       pattern: "wave",
       stats: {
         orders: "50K+",
@@ -254,19 +220,17 @@ export default function ProjectsSection() {
       ]
     }
   ];
-  
+
   const router = useRouter();
 
-  const filteredProjects = activeFilter === "all" 
-    ? projects 
+  const filteredProjects = activeFilter === "all"
+    ? projects
     : projects.filter(p => p.category === activeFilter);
-  
+
   useEffect(() => {
     setIsMounted(true);
-    
-    // GSAP Animations
+
     const ctx = gsap.context(() => {
-      // Section entrance
       gsap.from(sectionRef.current, {
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -278,8 +242,7 @@ export default function ProjectsSection() {
         duration: 1,
         ease: "power3.out"
       });
-      
-      // Title animation
+
       gsap.from(".section-title", {
         scrollTrigger: {
           trigger: ".section-title",
@@ -291,22 +254,7 @@ export default function ProjectsSection() {
         duration: 1.2,
         ease: "power4.out"
       });
-      
-      // Subtitle animation
-      gsap.from(".section-subtitle", {
-        scrollTrigger: {
-          trigger: ".section-subtitle",
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.2,
-        ease: "power2.out"
-      });
-      
-      // Stats animation
+
       gsap.from(".stat-card", {
         scrollTrigger: {
           trigger: ".stats-section",
@@ -320,46 +268,36 @@ export default function ProjectsSection() {
         ease: "power2.out"
       });
     }, sectionRef);
-    
+
     return () => ctx.revert();
   }, []);
-  
+
   if (!isMounted) {
     return null;
   }
-  
+
   return (
     <section
       ref={sectionRef}
       id="projects"
-      className={`relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden ${
-        theme === 'dark' ? 'bg-gradient-to-br from-gray-950 via-black to-gray-950' : 'bg-gradient-to-br from-gray-50 via-white to-gray-50'
-      }`}
+      className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0a0a0a]"
     >
       {/* Animated Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Gradient Orbs */}
-        <div className={`absolute -top-40 -right-40 w-80 h-80 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob ${
-          theme === 'dark' 
-            ? 'bg-gradient-to-r from-purple-600/30 via-pink-600/30 to-blue-600/30' 
-            : 'bg-gradient-to-r from-purple-300/20 via-pink-300/20 to-blue-300/20'
-        }`} />
-        <div className={`absolute -bottom-40 -left-40 w-80 h-80 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000 ${
-          theme === 'dark' 
-            ? 'bg-gradient-to-r from-blue-600/30 via-cyan-600/30 to-emerald-600/30' 
-            : 'bg-gradient-to-r from-blue-300/20 via-cyan-300/20 to-emerald-300/20'
-        }`} />
-        
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-3xl opacity-20 animate-pulse bg-gradient-to-r from-[#a78bfa]/30 via-[#ec4899]/30 to-[#6366f1]/30" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full blur-3xl opacity-20 animate-pulse animation-delay-2000 bg-gradient-to-r from-[#3b82f6]/30 via-[#06b6d4]/30 to-[#10b981]/30" />
+
         {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="w-full h-full" style={{
-            backgroundImage: `linear-gradient(90deg, currentColor 1px, transparent 1px),
-                              linear-gradient(currentColor 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(90deg, #faf8f0 1px, transparent 1px),
+                          linear-gradient(#faf8f0 1px, transparent 1px)`,
             backgroundSize: '80px 80px'
           }} />
         </div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <motion.div
@@ -375,32 +313,24 @@ export default function ProjectsSection() {
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 mb-8"
           >
-            <div className={`w-8 h-px ${
-              theme === 'dark' ? 'bg-gradient-to-r from-transparent via-white/30 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-600/30 to-transparent'
-            }`} />
-            <Badge 
-              variant="outline" 
-              className="px-4 py-2 rounded-full backdrop-blur-sm"
-              style={{
-                background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
-                borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'
-              }}
+            <div className="w-8 h-px bg-gradient-to-r from-transparent via-[#faf8f0]/30 to-transparent" />
+            <Badge
+              variant="outline"
+              className="px-4 py-2 rounded-full backdrop-blur-sm bg-[#111111]/50 border-[#faf8f0]/10"
             >
-              <Sparkles className="w-4 h-4 mr-2" />
-              <span className="text-sm font-medium tracking-widest">PORTFOLIO SHOWCASE</span>
+              <Sparkles className="w-4 h-4 mr-2 text-[#a78bfa]" />
+              <span className="text-sm font-medium tracking-widest text-[#faf8f0]/70">PORTFOLIO SHOWCASE</span>
             </Badge>
-            <div className={`w-8 h-px ${
-              theme === 'dark' ? 'bg-gradient-to-r from-transparent via-white/30 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-600/30 to-transparent'
-            }`} />
+            <div className="w-8 h-px bg-gradient-to-r from-transparent via-[#faf8f0]/30 to-transparent" />
           </motion.div>
 
           {/* Main Title */}
           <h1 className="section-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className={`block ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+            <span className="block text-[#faf8f0]">
               Building Digital
             </span>
             <span className="block mt-2">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 animate-gradient-x">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a78bfa] via-[#ec4899] to-[#6366f1] animate-gradient-x">
                 Experiences
               </span>
             </span>
@@ -408,16 +338,13 @@ export default function ProjectsSection() {
 
           {/* Subtitle */}
           <motion.p
-            className="section-subtitle text-lg md:text-xl max-w-3xl mx-auto font-light tracking-wide"
-            style={{
-              color: theme === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.6)'
-            }}
+            className="section-subtitle text-lg md:text-xl max-w-3xl mx-auto font-light tracking-wide text-[#faf8f0]/70"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Transforming innovative ideas into exceptional digital solutions through cutting-edge technology 
-            and user-centered design. Each project represents a unique challenge solved with precision, 
+            Transforming innovative ideas into exceptional digital solutions through cutting-edge technology
+            and user-centered design. Each project represents a unique challenge solved with precision,
             performance, and passion.
           </motion.p>
         </motion.div>
@@ -429,25 +356,25 @@ export default function ProjectsSection() {
               icon={<Layers className="w-5 h-5" />}
               value="50+"
               label="Projects Delivered"
-              color="bg-gradient-to-br from-purple-500 to-pink-500"
+              color="bg-gradient-to-br from-[#a78bfa] to-[#ec4899]"
             />
             <StatsCard
               icon={<Users className="w-5 h-5" />}
               value="100+"
               label="Happy Clients"
-              color="bg-gradient-to-br from-blue-500 to-cyan-500"
+              color="bg-gradient-to-br from-[#3b82f6] to-[#06b6d4]"
             />
             <StatsCard
               icon={<Clock className="w-5 h-5" />}
               value="3+"
               label="Years Experience"
-              color="bg-gradient-to-br from-green-500 to-emerald-500"
+              color="bg-gradient-to-br from-[#10b981] to-[#06b6d4]"
             />
             <StatsCard
               icon={<Star className="w-5 h-5" />}
               value="98%"
               label="Success Rate"
-              color="bg-gradient-to-br from-orange-500 to-red-500"
+              color="bg-gradient-to-br from-[#f59e0b] to-[#ef4444]"
             />
           </div>
         </div>
@@ -463,11 +390,11 @@ export default function ProjectsSection() {
         {/* Projects Grid */}
         {filteredProjects.length > 0 ? (
           <div className={
-            viewMode === 'grid' 
+            viewMode === 'grid'
               ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
               : 'space-y-8'
           }>
-            
+
             <AnimatePresence mode="wait">
               {filteredProjects.map((project) => (
                 <ProjectCard
@@ -483,24 +410,18 @@ export default function ProjectsSection() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-20"
           >
-            <div className={`text-6xl mb-6 ${theme === 'dark' ? 'text-gray-700' : 'text-gray-300'}`}>
+            <div className="text-6xl mb-6 text-[#faf8f0]/30">
               <Terminal className="inline-block" />
             </div>
-            <h3 className={`text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+            <h3 className="text-2xl font-bold mb-4 text-[#faf8f0]">
               No Projects Found
             </h3>
-            <p className={`mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className="mb-8 text-[#faf8f0]/60">
               Try selecting a different category or check back soon for new projects.
             </p>
             <Button
               onClick={() => setActiveFilter("all")}
-              className="rounded-full"
-              style={{
-                background: theme === 'dark' 
-                  ? 'linear-gradient(135deg, #8b5cf6, #6366f1)' 
-                  : 'linear-gradient(135deg, #8b5cf6, #6366f1)',
-                color: 'white'
-              }}
+              className="rounded-full bg-gradient-to-r from-[#a78bfa] to-[#6366f1] text-[#0a0a0a]"
             >
               View All Projects
             </Button>
@@ -514,49 +435,37 @@ export default function ProjectsSection() {
           viewport={{ once: true }}
           className="mt-32 text-center"
         >
-          <Card className={`border-0 overflow-hidden backdrop-blur-xl ${
-            theme === 'dark' 
-              ? 'bg-gradient-to-br from-gray-900/60 to-gray-800/40' 
-              : 'bg-gradient-to-br from-white/80 to-gray-50/80'
-          }`}>
+          <Card className="border-0 overflow-hidden backdrop-blur-xl bg-[#111111]/50 border-[#faf8f0]/10">
             <div className="p-12">
               <div className="space-y-8 max-w-3xl mx-auto">
                 <div className="space-y-4">
-                  <h3 className={`text-3xl sm:text-4xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                    Ready to Build Something 
+                  <h3 className="text-3xl sm:text-4xl font-bold text-[#faf8f0]">
+                    Ready to Build Something{" "}
                     <span className="block">
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
-                        Extraordinary Together?
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a78bfa] to-[#ec4899]">
+                        Amazing Together?
                       </span>
                     </span>
                   </h3>
-                  <p className={`text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-                    Let&apos;s collaborate on your next digital masterpiece. Whether it&apos;s a complex web application, 
-                    innovative AI solution, or seamless mobile experience - I&apos;m ready to bring your vision to life.
+                  <p className="text-lg text-[#faf8f0]/70">
+                    Let's collaborate on your next digital masterpiece. Whether it's a complex web application,
+                    innovative AI solution, or seamless mobile experience - I'm ready to bring your vision to life.
                   </p>
                 </div>
-                
+
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <motion.div
-                   onClick={() => {
-    const contactSection = document.getElementById("contact");
-    contactSection?.scrollIntoView({ behavior: "smooth" });
-  }}
-  className="cursor-pointer"
-
+                    onClick={() => {
+                      const contactSection = document.getElementById("contact");
+                      contactSection?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <Button
                       size="lg"
-                      className="rounded-full px-8 py-6 text-lg group"
-                      style={{
-                        background: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
-                        color: 'white',
-                        boxShadow: theme === 'dark' 
-                          ? '0 20px 60px rgba(139, 92, 246, 0.3)' 
-                          : '0 20px 60px rgba(139, 92, 246, 0.2)'
-                      }}
+                      className="rounded-full px-8 py-6 text-lg bg-gradient-to-r from-[#a78bfa] to-[#6366f1] text-[#0a0a0a] shadow-lg hover:shadow-xl"
                     >
                       <span className="flex items-center gap-2">
                         <span>Start a Project</span>
@@ -564,12 +473,12 @@ export default function ProjectsSection() {
                       </span>
                     </Button>
                   </motion.div>
-                  
+
                   <Button
-                  onClick={()=>router.push('/projects')}
+                    onClick={() => router.push('/projects')}
                     size="lg"
-                    variant={theme === 'dark' ? "outline" : "secondary"}
-                    className="rounded-full px-8 py-6 text-lg"
+                    variant="secondary"
+                    className="rounded-full px-8 py-6 text-lg bg-[#111111] text-[#faf8f0]/80 border border-[#faf8f0]/10 hover:bg-[#111111]/80"
                   >
                     <span className="flex items-center gap-2">
                       <Eye className="w-5 h-5" />
@@ -577,64 +486,63 @@ export default function ProjectsSection() {
                     </span>
                   </Button>
                 </div>
-                
-                <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} pt-4`}>
+
+                <div className="text-sm text-[#faf8f0]/60 pt-4">
                   <p>💡 <span className="font-medium">Pro Tip:</span> Looking for specific expertise? I specialize in:</p>
                   <div className="flex flex-wrap justify-center gap-2 mt-2">
                     {['Full-Stack Development', 'UI/UX Design', 'Performance Optimization', 'Scalable Architecture'].map((item) => (
-                      <Badge 
-                        key={item} 
+                      <Badge
+                        key={item}
                         variant="secondary"
-                        className="text-xs"
+                        className="text-xs bg-[#111111] text-[#faf8f0]/60 border border-[#faf8f0]/10"
                       >
                         {item}
                       </Badge>
                     ))}
                   </div>
                 </div>
-                
+
               </div>
             </div>
           </Card>
         </motion.div>
       </div>
 
-      {/* Global Styles */}
       <style jsx global>{`
         @keyframes gradient-x {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
         }
-        
+
         @keyframes blob {
           0% { transform: translate(0px, 0px) scale(1); }
           33% { transform: translate(30px, -50px) scale(1.1); }
           66% { transform: translate(-20px, 20px) scale(0.9); }
           100% { transform: translate(0px, 0px) scale(1); }
         }
-        
+
         .animate-gradient-x {
           background-size: 200% auto;
           animation: gradient-x 5s ease infinite;
         }
-        
+
         .animate-blob {
           animation: blob 7s infinite;
         }
-        
+
         .animation-delay-2000 {
           animation-delay: 2s;
         }
-        
+
         /* Smooth scrolling */
         html {
           scroll-behavior: smooth;
         }
-        
+
         /* Selection styles */
         ::selection {
-          background: ${theme === 'dark' ? 'rgba(139, 92, 246, 0.3)' : 'rgba(139, 92, 246, 0.2)'};
-          color: ${theme === 'dark' ? '#ffffff' : '#000000'};
+          background: rgba(167, 139, 250, 0.3);
+          color: #faf8f0;
         }
       `}</style>
     </section>

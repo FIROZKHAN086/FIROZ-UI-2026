@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from 'next-themes';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Sparkles, Brain, Code2, Palette, Shield, Zap, Workflow, TrendingUp, ArrowRight } from 'lucide-react';
@@ -9,32 +8,22 @@ import { Journey } from './Journey';
 import { Methodologies } from './Methodologies';
 import {StatsGrid} from './StatsGrid';
 import {FloatingElements} from './FloatingElements';
-import { AboutC } from './AboutC';
-
-
-
 
 export default function AboutMe() {
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const sectionRef = useRef(null);
 
-  const isDark = theme === 'dark';
-
   useEffect(() => {
     setMounted(true);
-    
-    // Check mobile
+
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
-    // GSAP Animations
+
     const ctx = gsap.context(() => {
-      // Section entrance
       gsap.from(sectionRef.current, {
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -47,7 +36,6 @@ export default function AboutMe() {
         ease: 'power3.out'
       });
 
-      // Title animation
       gsap.from('.section-title', {
         scrollTrigger: {
           trigger: '.section-title',
@@ -76,16 +64,15 @@ export default function AboutMe() {
     }
   };
 
-  // Highlighted text with gradients
   const highlightWords = [
-    { word: 'Full-Stack Developer', color: 'bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent' },
-    { word: 'innovative', color: 'bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent' },
-    { word: 'performant', color: 'bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent' },
-    { word: 'scalable', color: 'bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent' },
-    { word: 'user-centric', color: 'bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent' },
-    { word: 'cutting-edge', color: 'bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent' },
-    { word: 'elegant', color: 'bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent' },
-    { word: 'robust', color: 'bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent' },
+    { word: 'Full-Stack Developer', color: 'gradient-text' },
+    { word: 'innovative', color: 'gradient-text-blue' },
+    { word: 'performant', color: 'gradient-text' },
+    { word: 'scalable', color: 'gradient-text-blue' },
+    { word: 'user-centric', color: 'gradient-text' },
+    { word: 'cutting-edge', color: 'gradient-text' },
+    { word: 'elegant', color: 'gradient-text-blue' },
+    { word: 'robust', color: 'gradient-text' },
   ];
 
   const renderHighlightedText = (text:string) => {
@@ -104,23 +91,13 @@ My approach combines technical excellence with creative problem-solving, ensurin
 Driven by curiosity and a commitment to quality, I continuously explore cutting-edge technologies to stay ahead in the rapidly evolving digital landscape.`;
 
   return (
-    <section 
-    suppressHydrationWarning
+    <section
       ref={sectionRef}
       id="about"
-      className={`relative min-h-screen py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden ${
-        isDark 
-          ? 'bg-gradient-to-br from-gray-950 via-black to-gray-900' 
-          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
-      }`}
+      className="relative min-h-screen py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0a0a0a]"
     >
-
-
-      
-
       <FloatingElements />
-  
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
@@ -136,30 +113,21 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 mb-8"
           >
-            <div className={`w-8 h-px ${
-              isDark ? 'bg-gradient-to-r from-transparent via-white/30 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-600/30 to-transparent'
-            }`} />
-            <div className={`px-4 py-2 rounded-full text-sm font-medium tracking-widest uppercase backdrop-blur-sm border ${
-              isDark 
-                ? 'bg-gray-900/50 border-gray-700 text-purple-400' 
-                : 'bg-white/50 border-gray-300 text-purple-600'
-            }`}>
+            <div className="w-8 h-px bg-gradient-to-r from-transparent via-[#faf8f0]/30 to-transparent" />
+            <div className="px-4 py-2 rounded-full text-sm font-medium tracking-widest uppercase glass text-[#a78bfa] border-[#a78bfa]/30">
               <Sparkles className="inline-block w-4 h-4 mr-2" />
               About Me
             </div>
-            <div className={`w-8 h-px ${
-              isDark ? 'bg-gradient-to-r from-transparent via-white/30 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-600/30 to-transparent'
-            }`} />
+            <div className="w-8 h-px bg-gradient-to-r from-transparent via-[#faf8f0]/30 to-transparent" />
           </motion.div>
 
           {/* Main Title */}
-          <h1 className="section-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-bounce transition"
-          style={{ animationDuration: "3s" }}>
-            <span className={isDark ? 'text-white' : 'text-gray-900'}>
+          <h1 className="section-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <span className="text-[#faf8f0]">
               Crafting Digital
             </span>
             <span className="block mt-2">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 animate-gradient-x">
+              <span className="gradient-text animate-gradient-x">
                 Excellence
               </span>
             </span>
@@ -167,10 +135,7 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg md:text-xl max-w-3xl mx-auto"
-            style={{
-              color: isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.6)'
-            }}
+            className="text-lg md:text-xl max-w-3xl mx-auto text-[#faf8f0]/70"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -187,29 +152,21 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className={`mb-20 rounded-3xl p-8 lg:p-12 backdrop-blur-xl border ${
-            isDark 
-              ? 'bg-gradient-to-br from-gray-900/60 to-gray-800/40 border-gray-700' 
-              : 'bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200'
-          }`}
+          className="mb-20 rounded-3xl p-8 lg:p-12 glass"
         >
           <div className="flex items-center gap-6 mb-8">
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
-              className="p-5 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-xl"
+              className="p-5 rounded-2xl gradient-bg shadow-xl"
             >
-              <Brain className="w-8 h-8 text-white" />
+              <Brain className="w-8 h-8 text-[#0a0a0a]" />
             </motion.div>
             <div>
-              <h3 className={`text-3xl font-bold mb-2 animate-bounce ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>
+              <h3 className="text-3xl font-bold mb-2 text-[#faf8f0]">
                 My Philosophy
               </h3>
-              <p className={`text-lg ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>
+              <p className="text-lg text-[#faf8f0]/60">
                 Building with purpose, precision, and passion
               </p>
             </div>
@@ -218,37 +175,29 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Text Content */}
             <div>
-              <div 
-                className={`text-lg leading-relaxed space-y-4 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}
-                dangerouslySetInnerHTML={{ 
-                  __html: renderHighlightedText(description).replace(/\n/g, '<br /><br />') 
+              <div
+                className="text-lg leading-relaxed space-y-4 text-[#faf8f0]/80"
+                dangerouslySetInnerHTML={{
+                  __html: renderHighlightedText(description).replace(/\n/g, '<br /><br />')
                 }}
               />
-              
+
               {/* Quick Stats */}
               <div className="grid grid-cols-2 gap-4 mt-8">
                 {[
-                  { label: 'Code Quality', value: '99%', color: 'from-green-500 to-emerald-500' },
-                  { label: 'Project Success', value: '100%', color: 'from-blue-500 to-cyan-500' },
-                  { label: 'Client Retention', value: '95%', color: 'from-purple-500 to-pink-500' },
-                  { label: 'On-Time Delivery', value: '98%', color: 'from-amber-500 to-orange-500' },
+                  { label: 'Code Quality', value: '99%', color: 'gradient-text' },
+                  { label: 'Project Success', value: '100%', color: 'gradient-text-blue' },
+                  { label: 'Client Retention', value: '95%', color: 'gradient-text' },
+                  { label: 'On-Time Delivery', value: '98%', color: 'gradient-text-blue' },
                 ].map((stat, index) => (
                   <div
                     key={index}
-                    className={`p-4 rounded-xl backdrop-blur-sm border ${
-                      isDark 
-                        ? 'bg-gray-800/50 border-gray-700' 
-                        : 'bg-white/60 border-gray-200'
-                    }`}
+                    className="p-4 rounded-xl glass"
                   >
-                    <div className={`text-2xl font-bold bg-gradient-to-br ${stat.color} bg-clip-text text-transparent`}>
+                    <div className={`text-2xl font-bold ${stat.color}`}>
                       {stat.value}
                     </div>
-                    <div className={`text-sm ${
-                      isDark ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
+                    <div className="text-sm text-[#faf8f0]/60">
                       {stat.label}
                     </div>
                   </div>
@@ -263,49 +212,41 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
                   icon: <Code2 className="w-5 h-5" />,
                   title: 'Clean Code',
                   description: 'Maintainable, efficient, well-documented',
-                  gradient: 'from-blue-500 to-cyan-500'
+                  gradient: 'gradient-bg'
                 },
                 {
                   icon: <Palette className="w-5 h-5" />,
                   title: 'Design First',
                   description: 'Intuitive, accessible interfaces',
-                  gradient: 'from-purple-500 to-pink-500'
+                  gradient: 'gradient-bg'
                 },
                 {
                   icon: <Shield className="w-5 h-5" />,
                   title: 'Security',
                   description: 'Robust protection measures',
-                  gradient: 'from-green-500 to-emerald-500'
+                  gradient: 'gradient-bg-secondary'
                 },
                 {
                   icon: <Zap className="w-5 h-5" />,
                   title: 'Performance',
                   description: 'Fast, optimized solutions',
-                  gradient: 'from-amber-500 to-orange-500'
+                  gradient: 'gradient-bg-secondary'
                 }
               ].map((principle, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ y: -5 }}
-                  className={`p-6 rounded-xl backdrop-blur-sm border ${
-                    isDark 
-                      ? 'bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-gray-700' 
-                      : 'bg-gradient-to-br from-white/60 to-gray-50/60 border-gray-200'
-                  }`}
+                  className="p-6 rounded-xl glass"
                 >
-                  <div className={`inline-flex p-3 rounded-lg bg-gradient-to-br ${principle.gradient} mb-4`}>
-                    <div className="text-white">
+                  <div className={`inline-flex p-3 rounded-lg ${principle.gradient} mb-4`}>
+                    <div className="text-[#0a0a0a]">
                       {principle.icon}
                     </div>
                   </div>
-                  <h5 className={`font-bold text-sm mb-1 ${
-                    isDark ? 'text-gray-200' : 'text-gray-800'
-                  }`}>
+                  <h5 className="font-bold text-sm mb-1 text-[#faf8f0]">
                     {principle.title}
                   </h5>
-                  <p className={`text-xs ${
-                    isDark ? 'text-gray-300' : 'text-gray-600'
-                  }`}>
+                  <p className="text-xs text-[#faf8f0]/60">
                     {principle.description}
                   </p>
                 </motion.div>
@@ -325,19 +266,15 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
-              className="p-4 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-xl"
+              className="p-4 rounded-2xl gradient-bg shadow-xl"
             >
-              <Workflow className="w-8 h-8 text-white animate-bounce" />
+              <Workflow className="w-8 h-8 text-[#0a0a0a] animate-bounce" />
             </motion.div>
             <div className="text-center">
-              <h2 className={`text-4xl font-bold mb-2 animate-bounce ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>
+              <h2 className="text-4xl font-bold mb-2 text-[#faf8f0]">
                 Development Methodologies
               </h2>
-              <p className={`text-lg ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>
+              <p className="text-lg text-[#faf8f0]/60">
                 Structured approach to building exceptional software
               </p>
             </div>
@@ -357,21 +294,15 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
-              className="p-4 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-500 shadow-xl"
+              className="p-4 rounded-2xl bg-gradient-to-br from-[#10b981] to-[#06b6d4] shadow-xl"
             >
-              <TrendingUp className="w-8 h-8 text-white" />
+              <TrendingUp className="w-8 h-8 text-[#0a0a0a]" />
             </motion.div>
             <div className="text-center" id='aboutt'>
-              <h2 className={`text-4xl font-bold mb-2 animate-bounce ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}
-              style={{ animationDuration: "3s" }}
-            >
-              My Journey
-            </h2>
-            <p className={`text-lg ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>
+              <h2 className="text-4xl font-bold mb-2 text-[#faf8f0]">
+                My Journey
+              </h2>
+              <p className="text-lg text-[#faf8f0]/60">
                 From passion to professional expertise
               </p>
             </div>
@@ -387,43 +318,30 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl backdrop-blur-xl border mb-6 ${
-            isDark 
-              ? 'bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-700/30' 
-              : 'bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200'
-          }`}>
-            <Sparkles className="w-5 h-5 text-purple-500" />
-            <span className={`text-sm font-bold ${
-              isDark ? 'text-purple-400' : 'text-purple-600'
-            }`}>
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl glass mb-6">
+            <Sparkles className="w-5 h-5 text-[#a78bfa]" />
+            <span className="text-sm font-bold text-[#a78bfa]">
               Ready to Collaborate?
             </span>
           </div>
-          
-          <h3 className={`text-3xl font-bold mb-6 ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}>
+
+          <h3 className="text-3xl font-bold mb-6 text-[#faf8f0]">
             Let&#44;s Build Something{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+            <span className="gradient-text">
               Amazing Together
             </span>
           </h3>
-          
+
           <motion.button
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={scrollToContact}
-            className="px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3 mx-auto relative overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, #8b5cf6, #ec4899)',
-              boxShadow: '0 20px 60px rgba(139, 92, 246, 0.3)'
-            }}
+            className="px-10 py-4 rounded-2xl font-bold text-lg text-[#0a0a0a] transition-all duration-300 flex items-center justify-center gap-3 mx-auto relative overflow-hidden gradient-bg"
           >
-            <span className="relative z-10 text-white">Start a Project</span>
-            <ArrowRight className="w-5 h-5 text-white relative z-10" />
+            <span className="relative z-10">Start a Project</span>
+            <ArrowRight className="w-5 h-5 relative z-10 text-[#0a0a0a]" />
           </motion.button>
         </motion.div>
-        <AboutC/>
       </div>
 
       {/* Floating action button for mobile */}
@@ -432,7 +350,7 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={scrollToContact}
-          className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 text-white shadow-xl shadow-purple-500/30"
+          className="fixed bottom-6 right-6 z-50 p-4 rounded-full gradient-bg text-[#0a0a0a] shadow-xl shadow-[#a78bfa]/30"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -440,7 +358,6 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
         </motion.button>
       )}
 
-      {/* Global Styles */}
       <style jsx global>{`
         @keyframes gradient-x {
           0%, 100% { background-position: 0% 50%; }
@@ -449,6 +366,9 @@ Driven by curiosity and a commitment to quality, I continuously explore cutting-
         .animate-gradient-x {
           background-size: 200% auto;
           animation: gradient-x 5s ease infinite;
+        }
+        .gradient-bg {
+          background: linear-gradient(135deg, #a78bfa, #ec4899, #6366f1);
         }
       `}</style>
     </section>

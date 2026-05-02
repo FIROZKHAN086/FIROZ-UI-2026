@@ -2,12 +2,14 @@
 
 import React, { JSX, useEffect,  useRef,  useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useTransform, animate, useInView, easeOut, easeInOut,  spring } from "framer-motion";
-import { 
-  Code, 
-  Server, 
-  Palette, 
-  Cloud, 
-  Search, 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Code,
+  Server,
+  Palette,
+  Cloud,
+  Search,
   Smartphone,
   ArrowRight,
   X,
@@ -32,7 +34,7 @@ import {
   Infinity as InfinityIcon,
   Flame
 } from "lucide-react";
-import { useTheme } from "next-themes";
+import { SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 
 type CountUpProps = {
     value: string;
@@ -59,13 +61,13 @@ const CountUp = ({ value, duration = 2 }: CountUpProps) => {
 
   if (!hasNumber) {
     return (
-      <span ref={ref} className="text-4xl font-bold">
+      <span ref={ref} className="text-4xl font-bold text-[#faf8f0]">
         {value}
       </span>
     );
   }
 
-  return <motion.span ref={ref} className="text-4xl font-bold">{rounded}</motion.span>;
+  return <motion.span ref={ref} className="text-4xl font-bold text-[#faf8f0]">{rounded}</motion.span>;
 };
 
 type Service = {
@@ -73,7 +75,6 @@ type Service = {
   description: string;
   icon: JSX.Element;
   color: string;
-  darkColor: string;
   gradient: string;
   borderColor: string;
   stats: string[];
@@ -84,7 +85,6 @@ export function ServicesPage() {
   const [active, setActive] = useState<Service | null |boolean>(null);
   const [hoveredService, setHoveredService] = useState<null | number>(null);
   const ref = useRef<null>(null);
-  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -108,10 +108,9 @@ export function ServicesPage() {
       title: "Frontend Development",
       description: "Modern React & Next.js Solutions",
       icon: <Code className="w-6 h-6" />,
-      color: "from-blue-500 to-cyan-500",
-      darkColor: "from-blue-400 to-cyan-400",
-      gradient: "bg-gradient-to-br from-blue-500/10 to-cyan-500/10",
-      borderColor: "border-blue-500/20",
+      color: "from-[#3b82f6] to-[#06b6d4]",
+      gradient: "bg-gradient-to-br from-[#3b82f6]/10 to-[#06b6d4]/10",
+      borderColor: "border-[#3b82f6]/20",
       stats: ["React", "Next.js", "TypeScript", "Tailwind", "Framer"],
       features: [
         "Pixel-perfect responsive designs",
@@ -126,10 +125,9 @@ export function ServicesPage() {
       title: "Backend Development",
       description: "Scalable API & Database Solutions",
       icon: <Server className="w-6 h-6" />,
-      color: "from-emerald-500 to-teal-500",
-      darkColor: "from-emerald-400 to-teal-400",
-      gradient: "bg-gradient-to-br from-emerald-500/10 to-teal-500/10",
-      borderColor: "border-emerald-500/20",
+      color: "from-[#10b981] to-[#06b6d4]",
+      gradient: "bg-gradient-to-br from-[#10b981]/10 to-[#06b6d4]/10",
+      borderColor: "border-[#10b981]/20",
       stats: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Redis"],
       features: [
         "RESTful & GraphQL APIs",
@@ -144,10 +142,9 @@ export function ServicesPage() {
       title: "UI/UX Design",
       description: "User-Centered Design Systems",
       icon: <Palette className="w-6 h-6" />,
-      color: "from-violet-500 to-purple-500",
-      darkColor: "from-violet-400 to-purple-400",
-      gradient: "bg-gradient-to-br from-violet-500/10 to-purple-500/10",
-      borderColor: "border-violet-500/20",
+      color: "from-[#a78bfa] to-[#ec4899]",
+      gradient: "bg-gradient-to-br from-[#a78bfa]/10 to-[#ec4899]/10",
+      borderColor: "border-[#a78bfa]/20",
       stats: ["Figma", "Adobe XD", "Framer", "Prototyping", "Wireframing"],
       features: [
         "User research & persona development",
@@ -162,10 +159,9 @@ export function ServicesPage() {
       title: "DevOps & Cloud",
       description: "Infrastructure & Deployment",
       icon: <Cloud className="w-6 h-6" />,
-      color: "from-orange-500 to-amber-500",
-      darkColor: "from-orange-400 to-amber-400",
-      gradient: "bg-gradient-to-br from-orange-500/10 to-amber-500/10",
-      borderColor: "border-orange-500/20",
+      color: "from-[#f59e0b] to-[#ea580c]",
+      gradient: "bg-gradient-to-br from-[#f59e0b]/10 to-[#ea580c]/10",
+      borderColor: "border-[#f59e0b]/20",
       stats: ["AWS", "Docker", "Kubernetes", "CI/CD", "Terraform"],
       features: [
         "CI/CD pipeline setup",
@@ -180,10 +176,9 @@ export function ServicesPage() {
       title: "SEO Optimization",
       description: "Performance & Visibility",
       icon: <Search className="w-6 h-6" />,
-      color: "from-rose-500 to-pink-500",
-      darkColor: "from-rose-400 to-pink-400",
-      gradient: "bg-gradient-to-br from-rose-500/10 to-pink-500/10",
-      borderColor: "border-rose-500/20",
+      color: "from-[#ec4899] to-[#be185d]",
+      gradient: "bg-gradient-to-br from-[#ec4899]/10 to-[#be185d]/10",
+      borderColor: "border-[#ec4899]/20",
       stats: ["Technical SEO", "Analytics", "Speed", "Content", "Ranking"],
       features: [
         "Core Web Vitals optimization",
@@ -198,10 +193,9 @@ export function ServicesPage() {
       title: "Mobile Development",
       description: "Cross-Platform Solutions",
       icon: <Smartphone className="w-6 h-6" />,
-      color: "from-indigo-500 to-blue-500",
-      darkColor: "from-indigo-400 to-blue-400",
-      gradient: "bg-gradient-to-br from-indigo-500/10 to-blue-500/10",
-      borderColor: "border-indigo-500/20",
+      color: "from-[#6366f1] to-[#3b82f6]",
+      gradient: "bg-gradient-to-br from-[#6366f1]/10 to-[#3b82f6]/10",
+      borderColor: "border-[#6366f1]/20",
       stats: ["React Native", "PWA", "Responsive", "Touch", "Performance"],
       features: [
         "Mobile-first responsive design",
@@ -273,13 +267,9 @@ export function ServicesPage() {
   };
 
   return (
-    <section 
+    <section
       id="services"
-      className={`relative min-h-screen py-20 px-4 sm:px-6 lg:px-8 overflow-hidden
-        ${theme === 'dark' 
-          ? 'bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950' 
-          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
-        }`}
+      className="relative min-h-screen py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0a0a0a]"
     >
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -287,28 +277,18 @@ export function ServicesPage() {
         <motion.div
           variants={floatingVariants}
           animate="animate"
-          className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl
-            ${theme === 'dark'
-              ? 'bg-gradient-to-r from-blue-900/20 to-cyan-900/10'
-              : 'bg-gradient-to-r from-blue-200/30 to-cyan-200/20'
-            }`}
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl bg-gradient-to-r from-[#6366f1]/20 to-[#06b6d4]/10"
         />
         <motion.div
           variants={floatingVariants}
           animate="animate"
           transition={{ delay: 1 }}
-          className={`absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl
-            ${theme === 'dark'
-              ? 'bg-gradient-to-r from-purple-900/20 to-pink-900/10'
-              : 'bg-gradient-to-r from-purple-200/30 to-pink-200/20'
-            }`}
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl bg-gradient-to-r from-[#a78bfa]/20 to-[#ec4899]/10"
         />
         
         {/* Grid Pattern */}
-        <div className={`absolute inset-0 opacity-5
-          ${theme === 'dark' ? 'opacity-10' : 'opacity-3'}`}
-        >
-          <div className="w-full h-full bg-[linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute inset-0 opacity-5">
+          <div className="w-full h-full bg-[linear-gradient(to_right,#faf8f0_1px,transparent_1px),linear-gradient(to_bottom,#faf8f0_1px,transparent_1px)] bg-[size:60px_60px]" />
         </div>
       </div>
 
@@ -324,31 +304,25 @@ export function ServicesPage() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, type: "spring" }}
-            className={`inline-flex items-center gap-3 px-5 py-3 rounded-2xl backdrop-blur-xl border mb-6
-              ${theme === 'dark'
-                ? 'bg-gray-800/50 border-gray-700'
-                : 'bg-white/80 border-gray-200'
-              }`}
+            className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl backdrop-blur-xl border mb-6 bg-[#111111]/50 border-[#a78bfa]/30"
           >
-            <Rocket className="w-5 h-5 text-purple-500" />
-            <span className="text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <Rocket className="w-5 h-5 text-[#a78bfa]" />
+            <span className="text-sm font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#a78bfa] to-[#ec4899]">
               My Services
             </span>
           </motion.div>
 
-          <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight
-            ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-[#faf8f0]"
           >
             Crafting Digital{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 animate-gradient-x">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a78bfa] via-[#ec4899] to-[#a78bfa] animate-gradient-x">
               Solutions
             </span>
           </h1>
 
-          <p className={`text-lg max-w-3xl mx-auto mb-10 leading-relaxed
-            ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}
+          <p className="text-lg max-w-3xl mx-auto mb-10 leading-relaxed text-[#faf8f0]/70"
           >
-            From concept to deployment, I provide comprehensive web development services 
+            From concept to deployment, I provide comprehensive web development services
             that transform ideas into high-performance digital experiences.
           </p>
         </motion.div>
@@ -372,11 +346,7 @@ export function ServicesPage() {
               className="group cursor-pointer"
             >
               {/* Card */}
-              <div className={`relative rounded-2xl p-6 backdrop-blur-xl border overflow-hidden
-                ${theme === 'dark'
-                  ? 'bg-gray-800/50 border-gray-700'
-                  : 'bg-white/80 border-gray-200'
-                }`}
+              <div className="relative rounded-2xl p-6 backdrop-blur-xl border overflow-hidden bg-[#111111]/50 border-[#faf8f0]/10"
               >
                 {/* Animated background */}
                 <div className={`absolute inset-0 ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
@@ -387,58 +357,33 @@ export function ServicesPage() {
                   transition={{ duration: 0.6 }}
                   className={`inline-flex p-4 rounded-xl mb-6 bg-gradient-to-br ${service.color} shadow-lg`}
                 >
-                  <div className="text-white">
+                  <div className="text-[#0a0a0a]">
                     {service.icon}
                   </div>
                 </motion.div>
 
                 {/* Content */}
                 <div className="relative">
-                  <h3 className={`text-xl font-bold mb-3
-                    ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}
+                  <h3 className="text-xl font-bold mb-3 text-[#faf8f0]"
                   >
                     {service.title}
                   </h3>
-                  
-                  <p className={`text-sm mb-4
-                    ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}
+                 
+                  <p className="text-sm mb-4 text-[#faf8f0]/60"
                   >
                     {service.description}
                   </p>
 
-                  {/* Tech Tags
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {service.stats.map((tech, i) => (
-                      <motion.span
-                        key={i}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: i * 0.05 }}
-                        className={`px-3 py-1 rounded-full text-xs font-medium
-                          ${theme === 'dark'
-                            ? 'bg-gray-700/50 text-gray-300'
-                            : 'bg-gray-100 text-gray-700'
-                          }`}
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                  </div> */}
-
                   {/* Hover Indicator */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-200/50 dark:border-gray-700/50">
-                    <span className={`text-sm font-medium bg-gradient-to-r ${service.color} bg-clip-text text-transparent`}>
+                  <div className="flex items-center justify-between pt-4 border-t border-[#faf8f0]/10">
+                    <span className={`text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r ${service.color}`}>
                       View Details
                     </span>
                     <motion.div
                       whileHover={{ x: 5 }}
-                      className={`p-2 rounded-lg
-                        ${theme === 'dark'
-                          ? 'bg-gray-700/50'
-                          : 'bg-gray-100'
-                        }`}
+                      className="p-2 rounded-lg bg-[#111111]/50"
                     >
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 text-[#faf8f0]/40" />
                     </motion.div>
                   </div>
                 </div>
@@ -473,11 +418,7 @@ export function ServicesPage() {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className={`px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3 mx-auto group relative overflow-hidden
-              ${theme === 'dark'
-                ? 'bg-gradient-to-r from-purple-500 to-pink-500 shadow-xl shadow-purple-500/20'
-                : 'bg-gradient-to-r from-purple-600 to-pink-600 shadow-xl shadow-purple-500/30'
-              }`}
+            className="px-10 py-4 rounded-2xl font-bold text-lg text-[#0a0a0a] transition-all duration-300 flex items-center justify-center gap-3 mx-auto group relative overflow-hidden bg-gradient-to-r from-[#a78bfa] via-[#a78bfa] to-[#ec4899] shadow-xl shadow-[#a78bfa]/20"
           >
             {/* Animated border */}
             <motion.div
@@ -493,13 +434,13 @@ export function ServicesPage() {
               style={{ backgroundSize: '200% 200%' }}
             />
             
-            <span className="relative z-10 text-white">Start Your Project</span>
+            <span className="relative z-10">Start Your Project</span>
             <motion.div
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1, repeat: Infinity }}
               className="relative z-10"
             >
-              <Rocket className="w-5 h-5 text-white" />
+              <Rocket className="w-5 h-5 text-[#0a0a0a]" />
             </motion.div>
           </motion.button>
         </motion.div>
@@ -523,19 +464,11 @@ export function ServicesPage() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className={`w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl
-                  ${theme === 'dark'
-                    ? 'bg-gray-900 border-gray-700'
-                    : 'bg-white border-gray-200'
-                  } border shadow-2xl`}
+                className="w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#111111] border border-[#faf8f0]/10 shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Modal Header */}
-                <div className={`sticky top-0 p-6 border-b backdrop-blur-xl
-                  ${theme === 'dark'
-                    ? 'bg-gray-900/90 border-gray-700'
-                    : 'bg-white/90 border-gray-200'
-                  }`}
+                <div className="sticky top-0 p-6 border-b backdrop-blur-xl bg-[#111111]/90 border-[#faf8f0]/10"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
@@ -543,17 +476,15 @@ export function ServicesPage() {
                         whileHover={{ rotate: 360 }}
                         className={`p-3 rounded-xl bg-gradient-to-br ${(active as typeof services[0]).color} shadow-lg`}
                       >
-                        <div className="text-white">
+                        <div className="text-[#0a0a0a]">
                           {(active as typeof services[0]).icon}
                         </div>
                       </motion.div>
                       <div>
-                        <h3 className={`text-2xl font-bold
-                          ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}
-                        >
+                        <h3 className="text-2xl font-bold text-[#faf8f0]">
                           {(active as typeof services[0]).title}
                         </h3>
-                        <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                        <p className="text-[#faf8f0]/60">
                           {(active as typeof services[0]).description}
                         </p>
                       </div>
@@ -562,13 +493,9 @@ export function ServicesPage() {
                       whileHover={{ rotate: 90 }}
                       whileTap={{ scale: 0.9 }}
                       onClick={() => setActive(null)}
-                      className={`p-2 rounded-lg
-                        ${theme === 'dark'
-                          ? 'hover:bg-gray-800'
-                          : 'hover:bg-gray-100'
-                        }`}
+                      className="p-2 rounded-lg hover:bg-[#111111]/50"
                     >
-                      <X className="w-5 h-5" />
+                      <X className="w-5 h-5 text-[#faf8f0]/60" />
                     </motion.button>
                   </div>
                 </div>
@@ -577,9 +504,7 @@ export function ServicesPage() {
                 <div className="p-6">
                   {/* Features List */}
                   <div className="space-y-4">
-                    <h4 className={`text-lg font-bold mb-4
-                      ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}
-                    >
+                    <h4 className="text-lg font-bold mb-4 text-[#faf8f0]">
                       What I Offer
                     </h4>
                     
@@ -590,18 +515,10 @@ export function ServicesPage() {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.05 }}
-                          className={`flex items-start gap-3 p-4 rounded-xl
-                            ${theme === 'dark'
-                              ? 'bg-gray-800/50'
-                              : 'bg-gray-50'
-                            }`}
+                          className="flex items-start gap-3 p-4 rounded-xl bg-[#111111]/50"
                         >
-                          <CheckCircle className={`w-5 h-5 flex-shrink-0
-                            ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-500'}`}
-                          />
-                          <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}>
-                            {feature}
-                          </span>
+                          <CheckCircle className="w-5 h-5 flex-shrink-0 text-[#10b981]" />
+                          <span className="text-[#faf8f0]/70">{feature}</span>
                         </motion.div>
                       ))}
                     </div>
@@ -609,9 +526,7 @@ export function ServicesPage() {
 
                   {/* Tech Stack */}
                   <div className="mt-8">
-                    <h4 className={`text-lg font-bold mb-4
-                      ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}
-                    >
+                    <h4 className="text-lg font-bold mb-4 text-[#faf8f0]">
                       Technologies I Use
                     </h4>
                     <div className="flex flex-wrap gap-3">
@@ -619,11 +534,7 @@ export function ServicesPage() {
                         <motion.span
                           key={index}
                           whileHover={{ scale: 1.05, y: -2 }}
-                          className={`px-4 py-2 rounded-lg font-medium
-                            ${theme === 'dark'
-                              ? 'bg-gray-800 text-gray-300'
-                              : 'bg-gray-100 text-gray-700'
-                            }`}
+                          className="px-4 py-2 rounded-lg font-medium bg-[#111111]/50 text-[#faf8f0]/70"
                         >
                           {tech}
                         </motion.span>
@@ -633,14 +544,10 @@ export function ServicesPage() {
                 </div>
 
                 {/* Modal Footer */}
-                <div className={`sticky bottom-0 p-6 border-t backdrop-blur-xl
-                  ${theme === 'dark'
-                    ? 'bg-gray-900/90 border-gray-700'
-                    : 'bg-white/90 border-gray-200'
-                  }`}
+                <div className="sticky bottom-0 p-6 border-t backdrop-blur-xl bg-[#111111]/90 border-[#faf8f0]/10"
                 >
                   <div className="flex items-center justify-between">
-                    <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                    <p className="text-[#faf8f0]/60">
                       Ready to implement this solution?
                     </p>
                     <div className="flex items-center gap-3">
@@ -648,11 +555,7 @@ export function ServicesPage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setActive(null)}
-                        className={`px-6 py-3 rounded-xl font-medium
-                          ${theme === 'dark'
-                            ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          }`}
+                        className="px-6 py-3 rounded-xl font-medium bg-[#111111]/50 text-[#faf8f0]/70 hover:bg-[#111111]"
                       >
                         Close
                       </motion.button>
@@ -663,7 +566,7 @@ export function ServicesPage() {
                           document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' });
                           setActive(null);
                         }}
-                        className={`px-6 py-3 rounded-xl font-bold bg-gradient-to-r ${(active as typeof services[0]).color} text-white shadow-lg`}
+                        className="px-6 py-3 rounded-xl font-bold bg-gradient-to-r from-[#a78bfa] to-[#ec4899] text-[#0a0a0a] shadow-lg"
                       >
                         Start Project
                       </motion.button>

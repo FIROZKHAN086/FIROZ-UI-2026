@@ -2,21 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
-import { useTheme } from 'next-themes';
-
 
 // Floating Background Elements Component
 export  const FloatingElements = () => {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Animated Gradient Orbs */}
       <motion.div
-        className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl ${
-          isDark ? 'opacity-20' : 'opacity-10'
-        }`}
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-20"
         animate={{
           y: [0, -50, 0],
           scale: [1, 1.1, 1]
@@ -27,15 +20,11 @@ export  const FloatingElements = () => {
           ease: "easeInOut"
         }}
         style={{
-          background: isDark
-            ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.2))'
-            : 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1))'
+          background: 'linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(236, 72, 153, 0.2))'
         }}
       />
       <motion.div
-        className={`absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl ${
-          isDark ? 'opacity-20' : 'opacity-10'
-        }`}
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-20"
         animate={{
           y: [0, 50, 0],
           scale: [1, 1.2, 1]
@@ -47,18 +36,18 @@ export  const FloatingElements = () => {
           delay: 1
         }}
         style={{
-          background: isDark
-            ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.2))'
-            : 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1))'
+          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.2))'
         }}
       />
       
-  
-     <div className={`absolute inset-0 opacity-5
-          ${theme === 'dark' ? 'opacity-10' : 'opacity-3'}`}
-        >
-          <div className="w-full h-full bg-[linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] bg-[size:60px_60px]" />
-        </div>
+     
+      <div className="absolute inset-0 opacity-5">
+        <div className="w-full h-full" style={{
+          backgroundImage: `linear-gradient(90deg, #faf8f0 1px, transparent 1px),
+                            linear-gradient(#faf8f0 1px, transparent 1px)`,
+          backgroundSize: '60px 60px'
+        }} />
+      </div>
       
       {/* Floating Tech Icons */}
       {[
@@ -69,9 +58,7 @@ export  const FloatingElements = () => {
       ].map((tech, i) => (
         <motion.div
           key={i}
-          className={`absolute ${
-            isDark ? 'text-white/5' : 'text-black/5'
-          }`}
+          className="absolute text-[#faf8f0]/5"
           initial={{
             x: Math.random() * 80 + 'vw',
             y: Math.random() * 80 + 'vh',
@@ -85,8 +72,7 @@ export  const FloatingElements = () => {
           transition={{
             duration: Math.random() * 20 + 20,
             repeat: Infinity,
-            ease: 'linear',
-            delay: tech.delay
+            ease: 'linear'
           }}
         >
           <tech.Icon className="w-24 h-24" />
@@ -97,9 +83,7 @@ export  const FloatingElements = () => {
       {[...Array(30)].map((_, i) => (
         <motion.div
           key={i}
-          className={`absolute rounded-full ${
-            isDark ? 'bg-white/10' : 'bg-black/5'
-          }`}
+          className={`absolute rounded-full ${i % 2 === 0 ? 'bg-[#a78bfa]/10' : 'bg-[#faf8f0]/5'}`}
           style={{
             width: Math.random() * 4 + 2,
             height: Math.random() * 4 + 2,

@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inconsolata, Jost, Unbounded } from "next/font/google";
+import {   Jost } from "next/font/google";
 import "./_Components/Style/globals.css";
-import { ThemeProvider } from "./_Components/Theme/Theme";
 import Header from "./_Components/UI/Header";
 import Footer from "./_Components/UI/Footer";
 import { Cursor } from "./_Components/UI/Cursor";
 import { Toaster } from "react-hot-toast";
-import { Analytics } from "@vercel/analytics/next"
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { Analytics } from "@vercel/analytics/next";
 
-const unbounded = Jost({
+
+
+const jost = Jost({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-unbounded",
+  variable: "--font-jost",
   display: "swap",
 });
 
@@ -23,7 +20,6 @@ export const metadata: Metadata = {
   title: "FIROZ Dev | Portfolio",
   description:
     "A modern portfolio showcasing my web development skills, real client testimonials, and high-quality projects built with React, Next.js, and TypeScript.",
-
   verification: {
     google: "oL4aejLeDtqxjfIYPPQBOg-GddA4_wZ5Nqi7WFNU_VQ",
   },
@@ -35,25 +31,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    
-    <html lang="en" suppressHydrationWarning={true}>
-       <link rel="icon" href="/firoz.png" />
-        <meta name="theme-color" content="#000000" />
+    <html lang="en">
+      <link rel="icon" href="/firoz.png" />
+      <meta name="theme-color" content="#0a0a0a" />
       <body
-      suppressHydrationWarning
-        className={` ${unbounded.variable} antialiased`}
-        >
-      <ThemeProvider>
-        <Toaster
-  position="top-right"
-  reverseOrder={false}
-/>  
+        className={`${jost.variable} antialiased bg-[#0a0a0a] text-[#faf8f0]`}
+      >
+        <Toaster position="top-right" reverseOrder={false} />
         <Analytics />
-        <Cursor/>
-        <Header/>
+        <Cursor />
+        <Header />
         {children}
-        <Footer/>
-        </ThemeProvider>
+        <Footer />
       </body>
     </html>
   );

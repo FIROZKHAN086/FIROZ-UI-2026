@@ -1,21 +1,20 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { JSX, useEffect,  useRef,  useState } from 'react';
 import { motion, AnimatePresence, easeInOut } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useTheme } from 'next-themes';
-import { 
-  Rocket, 
-  ChevronRight, 
-  Target, 
-  TrendingUp, 
-  Zap, 
-  Sparkles, 
-  Code2, 
-  Server, 
-  Terminal, 
-  GitBranch, 
+import {
+  Rocket,
+  ChevronRight,
+  Target,
+  TrendingUp,
+  Zap,
+  Sparkles,
+  Code2,
+  Server,
+  Terminal,
+  GitBranch,
   Palette,
   Globe,
   Layers,
@@ -58,19 +57,19 @@ import {
   Compass,
   Bot
 } from 'lucide-react';
-import { 
-  SiNextdotjs, 
-  SiReact, 
-  SiTypescript, 
-  SiTailwindcss, 
-  SiNodedotjs, 
-  SiMongodb, 
-  SiPostgresql, 
-  SiFirebase, 
-  SiVercel, 
-  SiNetlify, 
-  SiFigma, 
-  SiPostman,  
+import {
+  SiNextdotjs,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiMongodb,
+  SiPostgresql,
+  SiFirebase,
+  SiVercel,
+  SiNetlify,
+  SiFigma,
+  SiPostman,
   SiGithub,
   SiPrisma,
   SiGraphql,
@@ -89,17 +88,16 @@ import {
 } from 'react-icons/si';
 import { BiLogoVisualStudio } from "react-icons/bi";
 
-// Register GSAP plugins
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
-// Enhanced expertise data
+
 const expertiseData = {
   frontend: {
     title: 'Frontend Engineering',
     description: 'Crafting immersive, performant user experiences with modern frameworks',
     icon: <Code2 className="w-6 h-6" />,
-    gradient: 'from-blue-500 via-cyan-500 to-teal-500',
+    gradient: 'from-[#3b82f6] via-[#06b6d4] to-[#06b6d4]',
     technologies: [
       {
         name: 'React.js',
@@ -151,7 +149,7 @@ const expertiseData = {
     title: 'Backend Development',
     description: 'Building robust, scalable server-side architectures and APIs',
     icon: <Server className="w-6 h-6" />,
-    gradient: 'from-emerald-500 via-green-500 to-teal-500',
+    gradient: 'from-[#10b981] via-[#10b981] to-[#06b6d4]',
     technologies: [
       {
         name: 'Node.js',
@@ -203,7 +201,7 @@ const expertiseData = {
     title: 'DevOps & Tools',
     description: 'Development workflow, deployment, and collaboration tools',
     icon: <Terminal className="w-6 h-6" />,
-    gradient: 'from-amber-500 via-orange-500 to-red-500',
+    gradient: 'from-[#f59e0b] via-[#f59e0b] to-[#ea580c]',
     technologies: [
       {
         name: 'Docker',
@@ -252,20 +250,18 @@ const expertiseData = {
     ]
   }
 };
+
 type ExpertiseKey = keyof typeof expertiseData;
 
- export const AboutC = () => {
+export const AboutC = () => {
   const [activeCategory, setActiveCategory] = useState<ExpertiseKey>('frontend');
   const [hoveredTech, setHoveredTech] = useState(null);
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
-
+  
   useEffect(() => {
     setMounted(true);
     
-    // GSAP Animations
     const ctx = gsap.context(() => {
-      // Title animation
       gsap.from('.section-title', {
         scrollTrigger: {
           trigger: '.section-title',
@@ -278,7 +274,6 @@ type ExpertiseKey = keyof typeof expertiseData;
         ease: 'power4.out'
       });
 
-      // Stats animation
       gsap.from('.stat-item', {
         scrollTrigger: {
           trigger: '.stats-container',
@@ -292,7 +287,6 @@ type ExpertiseKey = keyof typeof expertiseData;
         ease: 'power2.out'
       });
 
-      // Cards animation
       gsap.from('.tech-card', {
         scrollTrigger: {
           trigger: '.tech-cards',
@@ -312,7 +306,6 @@ type ExpertiseKey = keyof typeof expertiseData;
 
   if (!mounted) return null;
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -361,79 +354,72 @@ type ExpertiseKey = keyof typeof expertiseData;
     }
   };
 
-  // Theme helpers
-  const isDark = theme === 'dark';
-
-  // Enhanced stats data
   const stats = [
-    { 
-      label: 'Projects Delivered', 
-      value: '50+', 
-      icon: <Target className="w-5 h-5" />, 
-      gradient: 'from-blue-500 to-cyan-500',
+    {
+      label: 'Projects Delivered',
+      value: '50+',
+      icon: <Target className="w-5 h-5" />,
+      gradient: 'from-[#a78bfa] to-[#ec4899]',
       suffix: 'Successfully',
       description: 'From MVPs to enterprise solutions'
     },
-    { 
-      label: 'Years Experience', 
-      value: '3+', 
-      icon: <TrendingUp className="w-5 h-5" />, 
-      gradient: 'from-purple-500 to-pink-500',
+    {
+      label: 'Years Experience',
+      value: '3+',
+      icon: <TrendingUp className="w-5 h-5" />,
+      gradient: 'from-[#a78bfa] to-[#ec4899]',
       suffix: 'Professional',
       description: 'Building modern web applications'
     },
-    { 
-      label: 'Technologies', 
-      value: '25+', 
-      icon: <Zap className="w-5 h-5" />, 
-      gradient: 'from-emerald-500 to-teal-500',
+    {
+      label: 'Technologies',
+      value: '25+',
+      icon: <Zap className="w-5 h-5" />,
+      gradient: 'from-[#10b981] to-[#06b6d4]',
       suffix: 'Mastered',
       description: 'Modern stack expertise'
     },
-    { 
-      label: 'Client Satisfaction', 
-      value: '100%', 
-      icon: <Star className="w-5 h-5" />, 
-      gradient: 'from-amber-500 to-orange-500',
+    {
+      label: 'Client Satisfaction',
+      value: '100%',
+      icon: <Star className="w-5 h-5" />,
+      gradient: 'from-[#f59e0b] to-[#ef4444]',
       suffix: 'Happy Clients',
       description: 'Positive feedback & retention'
     },
   ];
 
-
-  // Development principles
   const principles = [
     {
       icon: <Code className="w-5 h-5" />,
       title: 'Clean Code',
       description: 'Writing maintainable, efficient, and well-documented code following best practices',
-      gradient: 'from-blue-500 to-cyan-500',
+      gradient: 'from-[#3b82f6] to-[#06b6d4]',
       points: ['DRY Principle', 'SOLID Principles', 'Readability', 'Documentation']
     },
     {
       icon: <LayoutDashboard className="w-5 h-5" />,
       title: 'User Experience',
       description: 'Creating intuitive, accessible, and engaging interfaces that users love',
-      gradient: 'from-purple-500 to-pink-500',
+      gradient: 'from-[#a78bfa] to-[#ec4899]',
       points: ['Accessibility', 'Responsive', 'Performance', 'Intuitive']
     },
     {
       icon: <ShieldCheck className="w-5 h-5" />,
       title: 'Security First',
       description: 'Implementing robust security measures to protect applications and data',
-      gradient: 'from-green-500 to-emerald-500',
+      gradient: 'from-[#10b981] to-[#06b6d4]',
       points: ['Authentication', 'Authorization', 'Encryption', 'Validation']
     },
     {
       icon: <ZapIcon className="w-5 h-5" />,
       title: 'Performance',
       description: 'Optimizing for speed, efficiency, and optimal resource utilization',
-      gradient: 'from-amber-500 to-orange-500',
+      gradient: 'from-[#f59e0b] to-[#ea580c]',
       points: ['Lazy Loading', 'Caching', 'Optimization', 'Monitoring']
     }
   ];
 
-  // Process steps
   const processSteps = [
     {
       step: '01',
@@ -462,13 +448,9 @@ type ExpertiseKey = keyof typeof expertiseData;
   ];
 
   return (
-    <section 
+    <section
       id="about"
-      className={`relative min-h-screen py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden ${
-        isDark 
-          ? 'bg-gradient-to-br from-gray-950 via-black to-gray-900' 
-          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
-      }`}
+      className="relative min-h-screen py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0a0a0a]"
     >
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -476,20 +458,16 @@ type ExpertiseKey = keyof typeof expertiseData;
         <motion.div
           variants={floatVariants}
           animate="float"
-          className={`absolute -top-40 -right-40 w-80 h-80 rounded-full mix-blend-multiply filter blur-3xl ${
-            isDark ? 'opacity-20' : 'opacity-10'
-          }`}
+          className="absolute -top-40 -right-40 w-80 h-80 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
           style={{
-            background: 'linear-gradient(135deg, #8b5cf6, #6366f1)'
+            background: 'linear-gradient(135deg, #a78bfa, #ec4899)'
           }}
         />
         <motion.div
           variants={floatVariants}
           animate="float"
           transition={{ delay: 1 }}
-          className={`absolute -bottom-40 -left-40 w-80 h-80 rounded-full mix-blend-multiply filter blur-3xl ${
-            isDark ? 'opacity-20' : 'opacity-10'
-          }`}
+          className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
           style={{
             background: 'linear-gradient(135deg, #10b981, #3b82f6)'
           }}
@@ -498,8 +476,8 @@ type ExpertiseKey = keyof typeof expertiseData;
         {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="w-full h-full" style={{
-            backgroundImage: `linear-gradient(90deg, currentColor 1px, transparent 1px),
-                              linear-gradient(currentColor 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(90deg, #faf8f0 1px, transparent 1px),
+                              linear-gradient(#faf8f0 1px, transparent 1px)`,
             backgroundSize: '60px 60px'
           }} />
         </div>
@@ -508,7 +486,7 @@ type ExpertiseKey = keyof typeof expertiseData;
         {[SiReact, SiNextdotjs, SiTypescript, SiTailwindcss].map((Icon, i) => (
           <motion.div
             key={i}
-            className={`absolute ${isDark ? 'text-white/5' : 'text-black/5'}`}
+            className="absolute text-[#faf8f0]/5"
             initial={{
               x: Math.random() * 80 + 'vw',
               y: Math.random() * 80 + 'vh',
@@ -545,29 +523,21 @@ type ExpertiseKey = keyof typeof expertiseData;
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 mb-8"
           >
-            <div className={`w-8 h-px ${
-              isDark ? 'bg-gradient-to-r from-transparent via-white/30 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-600/30 to-transparent'
-            }`} />
-            <div className={`px-4 py-2 rounded-full text-sm font-medium tracking-widest uppercase backdrop-blur-sm border ${
-              isDark 
-                ? 'bg-gray-900/50 border-gray-700 text-purple-400' 
-                : 'bg-white/50 border-gray-300 text-purple-600'
-            }`}>
+            <div className="w-8 h-px bg-gradient-to-r from-transparent via-[#faf8f0]/30 to-transparent" />
+            <div className="px-4 py-2 rounded-full text-sm font-medium tracking-widest uppercase glass text-[#a78bfa] border-[#a78bfa]/30">
               <Sparkles className="inline-block w-4 h-4 mr-2" />
               About Me
             </div>
-            <div className={`w-8 h-px ${
-              isDark ? 'bg-gradient-to-r from-transparent via-white/30 to-transparent' : 'bg-gradient-to-r from-transparent via-gray-600/30 to-transparent'
-            }`} />
+            <div className="w-8 h-px bg-gradient-to-r from-transparent via-[#faf8f0]/30 to-transparent" />
           </motion.div>
 
           {/* Title */}
           <h1 className="section-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className={isDark ? 'text-white' : 'text-gray-900'}>
+            <span className="text-[#faf8f0]">
               Crafting Digital
             </span>
             <span className="block mt-2">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 animate-gradient-x">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a78bfa] via-[#ec4899] to-[#a78bfa] animate-gradient-x">
                 Masterpieces
               </span>
             </span>
@@ -575,90 +545,62 @@ type ExpertiseKey = keyof typeof expertiseData;
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg md:text-xl max-w-3xl mx-auto"
-            style={{
-              color: isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.6)'
-            }}
+            className="text-lg md:text-xl max-w-3xl mx-auto text-[#faf8f0]/70"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Transforming complex challenges into elegant, high-performance digital solutions through 
+            Transforming complex challenges into elegant, high-performance digital solutions through
             innovative technology, meticulous design, and strategic thinking.
           </motion.p>
         </motion.div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-  {stats.map((stat, index) => (
-    <motion.div
-      key={index}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      whileHover={{ y: -5 }}
-      className="relative group"
-    >
-      {/* 🔹 HARD-CODED BETA BADGE */}
-      <span
-        className={`absolute top-3 right-3 z-10 px-2 py-0.5 rounded-full
-        text-[10px] font-semibold tracking-wide
-        ${isDark
-          ? 'bg-yellow-400/10 text-yellow-400 border border-yellow-400/20'
-          : 'bg-yellow-100 text-yellow-700 border border-yellow-300'}
-      `}
-      >
-       hard-coded
-      </span>
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="relative group"
+            >
+              <div
+                className="p-6 rounded-2xl backdrop-blur-xl border bg-[#111111]/50 border-[#faf8f0]/10"
+              >
+                <div
+                  className={`inline-flex p-3 rounded-full mb-4 bg-gradient-to-br ${stat.gradient}`}
+                >
+                  <div className="text-[#0a0a0a]">{stat.icon}</div>
+                </div>
 
-      <div
-        className={`p-6 rounded-2xl backdrop-blur-xl border ${
-          isDark
-            ? 'bg-gray-900/40 border-gray-700'
-            : 'bg-white/60 border-gray-200'
-        }`}
-      >
-        <div
-          className={`inline-flex p-3 rounded-full mb-4 bg-gradient-to-br ${stat.gradient}`}
-        >
-          <div className="text-white">{stat.icon}</div>
+                <div
+                  className="text-3xl font-bold mb-1 text-[#faf8f0]"
+                >
+                  {stat.value}
+                </div>
+
+                <div
+                  className="text-sm font-semibold mb-1 text-[#faf8f0]/80"
+                >
+                  {stat.label}
+                </div>
+
+                <div
+                  className="text-xs text-[#faf8f0]/60"
+                >
+                  {stat.description}
+                </div>
+              </div>
+
+              <div
+                className="absolute inset-0 rounded-2xl bg-gradient-to-br from-transparent via-transparent to-[#faf8f0]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              />
+            </motion.div>
+          ))}
         </div>
-
-        <div
-          className={`text-3xl font-bold mb-1 ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}
-        >
-          {stat.value}
-        </div>
-
-        <div
-          className={`text-sm font-semibold mb-1 ${
-            isDark ? 'text-gray-300' : 'text-gray-700'
-          }`}
-        >
-          {stat.label}
-        </div>
-
-        <div
-          className={`text-xs ${
-            isDark ? 'text-gray-400' : 'text-gray-500'
-          }`}
-        >
-          {stat.description}
-        </div>
-      </div>
-
-      <div
-        className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-transparent via-transparent ${
-          isDark ? 'to-white/5' : 'to-black/5'
-        } opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`}
-      />
-    </motion.div>
-  ))}
-</div>
-
 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
@@ -670,26 +612,18 @@ type ExpertiseKey = keyof typeof expertiseData;
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
-              className={`mb-12 rounded-3xl p-8 backdrop-blur-xl border ${
-                isDark 
-                  ? 'bg-gradient-to-br from-gray-900/60 to-gray-800/40 border-gray-700' 
-                  : 'bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200'
-              }`}
+              className="mb-12 rounded-3xl p-8 glass"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className={`p-4 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg`}>
-                  <Rocket className="w-7 h-7 text-white" />
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-[#a78bfa] to-[#ec4899] shadow-lg">
+                  <Rocket className="w-7 h-7 text-[#0a0a0a]" />
                 </div>
                 <div>
-                  <h3 className={`text-2xl font-bold mb-2 ${
-                    isDark ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  <h3 className="text-2xl font-bold mb-2 text-[#faf8f0]">
                     My Development Journey
                   </h3>
-                  <p className={`text-sm ${
-                    isDark ? 'text-gray-400' : 'text-gray-600'
-                  }`}>
-                    From curiosity to craftsmanship
+                  <p className="text-sm text-[#faf8f0]/60">
+                    From passion to craftsmanship
                   </p>
                 </div>
               </div>
@@ -715,26 +649,16 @@ type ExpertiseKey = keyof typeof expertiseData;
                   <motion.div
                     key={index}
                     whileHover={{ x: 5 }}
-                    className={`flex gap-4 p-4 rounded-xl ${
-                      isDark 
-                        ? 'bg-gray-800/50 border-gray-700' 
-                        : 'bg-white/50 border-gray-200'
-                    } border`}
+                    className="flex gap-4 p-4 rounded-xl bg-[#111111]/50 border border-[#faf8f0]/10"
                   >
-                    <div className={`text-2xl p-3 rounded-lg ${
-                      isDark ? 'bg-gray-700' : 'bg-gray-100'
-                    }`}>
+                    <div className="text-2xl p-3 rounded-lg bg-[#111111]">
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className={`font-bold mb-1 ${
-                        isDark ? 'text-gray-200' : 'text-gray-800'
-                      }`}>
+                      <h4 className="font-bold mb-1 text-[#faf8f0]/90">
                         {item.title}
                       </h4>
-                      <p className={`text-sm ${
-                        isDark ? 'text-gray-400' : 'text-gray-600'
-                      }`}>
+                      <p className="text-sm text-[#faf8f0]/60">
                         {item.description}
                       </p>
                     </div>
@@ -744,9 +668,7 @@ type ExpertiseKey = keyof typeof expertiseData;
 
               {/* Development Process */}
               <div className="mt-10">
-                <h4 className={`text-lg font-bold mb-6 ${
-                  isDark ? 'text-white' : 'text-gray-900'
-                }`}>
+                <h4 className="text-lg font-bold mb-6 text-[#faf8f0]">
                   Development Process
                 </h4>
                 <div className="grid grid-cols-2 gap-4">
@@ -754,26 +676,16 @@ type ExpertiseKey = keyof typeof expertiseData;
                     <motion.div
                       key={index}
                       whileHover={{ scale: 1.05 }}
-                      className={`p-4 rounded-xl border ${
-                        isDark 
-                          ? 'bg-gray-800/50 border-gray-700' 
-                          : 'bg-white/50 border-gray-200'
-                      }`}
+                      className="p-4 rounded-xl border bg-[#111111]/50 border-[#faf8f0]/10"
                     >
-                      <div className={`text-sm font-bold mb-2 ${
-                        isDark ? 'text-purple-400' : 'text-purple-600'
-                      }`}>
+                      <div className="text-sm font-bold mb-2 text-[#a78bfa]">
                         {step.step}
                       </div>
-                      <div className={`flex items-center gap-2 mb-2 ${
-                        isDark ? 'text-gray-300' : 'text-gray-700'
-                      }`}>
+                      <div className="flex items-center gap-2 mb-2 text-[#faf8f0]/80">
                         {step.icon}
                         <span className="font-bold">{step.title}</span>
                       </div>
-                      <p className={`text-xs ${
-                        isDark ? 'text-gray-400' : 'text-gray-600'
-                      }`}>
+                      <p className="text-xs text-[#faf8f0]/60">
                         {step.description}
                       </p>
                     </motion.div>
@@ -792,34 +704,22 @@ type ExpertiseKey = keyof typeof expertiseData;
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
-                  className={`p-4 rounded-xl backdrop-blur-sm border ${
-                    isDark 
-                      ? 'bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-gray-700' 
-                      : 'bg-gradient-to-br from-white/60 to-gray-50/60 border-gray-200'
-                  }`}
+                  className="p-4 rounded-xl glass"
                 >
                   <div className={`inline-flex p-2 rounded-lg bg-gradient-to-br ${principle.gradient} mb-3`}>
-                    <div className="text-white">{principle.icon}</div>
+                    <div className="text-[#0a0a0a]">{principle.icon}</div>
                   </div>
-                  <h5 className={`font-bold text-sm mb-1 ${
-                    isDark ? 'text-gray-200' : 'text-gray-800'
-                  }`}>
+                  <h5 className="font-bold text-sm mb-1 text-[#faf8f0]">
                     {principle.title}
                   </h5>
-                  <p className={`text-xs mb-3 ${
-                    isDark ? 'text-gray-300' : 'text-gray-600'
-                  }`}>
+                  <p className="text-xs mb-3 text-[#faf8f0]/60">
                     {principle.description}
                   </p>
                   <div className="flex flex-wrap gap-1">
                     {principle.points.map((point, i) => (
                       <span
                         key={i}
-                        className={`px-2 py-1 rounded-full text-xs ${
-                          isDark 
-                            ? 'bg-gray-800 text-gray-300' 
-                            : 'bg-gray-100 text-gray-700'
-                        }`}
+                        className="px-2 py-1 rounded-full text-xs bg-[#111111] text-[#faf8f0]/70"
                       >
                         {point}
                       </span>
@@ -835,19 +735,15 @@ type ExpertiseKey = keyof typeof expertiseData;
             {/* Tech Stack Header */}
             <div className="mb-10">
               <div className="flex items-center gap-4 mb-6">
-                <div className={`p-4 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500`}>
-                  <Cpu className="w-6 h-6 text-white" />
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-[#a78bfa] to-[#ec4899]">
+                  <Cpu className="w-6 h-6 text-[#0a0a0a]" />
                 </div>
                 <div
-                id='skill'>
-                  <h3 className={`text-3xl font-bold mb-2 ${
-                    isDark ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  id='skill'>
+                  <h3 className="text-3xl font-bold mb-2 text-[#faf8f0]">
                     Tech Stack
                   </h3>
-                  <p className={`text-lg ${
-                    isDark ? 'text-gray-400' : 'text-gray-600'
-                  }`}>
+                  <p className="text-lg text-[#faf8f0]/60">
                     Technologies & tools I work with daily
                   </p>
                 </div>
@@ -864,10 +760,8 @@ type ExpertiseKey = keyof typeof expertiseData;
                   onClick={() => setActiveCategory(key as ExpertiseKey)}
                   className={`px-4 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 ${
                     activeCategory === key
-                      ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg`
-                      : isDark
-                        ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? `bg-gradient-to-r ${category.gradient} text-[#0a0a0a] shadow-lg`
+                      : 'bg-[#111111]/50 text-[#faf8f0]/70 hover:bg-[#111111]/80 border border-[#faf8f0]/10'
                   }`}
                 >
                   {category.icon}
@@ -885,28 +779,18 @@ type ExpertiseKey = keyof typeof expertiseData;
                 exit={{ opacity: 0, y: -20 }}
                 className="tech-cards mb-10"
               >
-                <div className={`rounded-3xl p-8 backdrop-blur-xl border ${
-                  isDark 
-                    ? 'bg-gradient-to-br from-gray-900/60 to-gray-800/40 border-gray-700' 
-                    : 'bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200'
-                }`}>
+                <div className="rounded-3xl p-8 glass">
                   <div className="flex items-center gap-4 mb-8">
-                    <div className={`p-4 rounded-2xl bg-gradient-to-r ${
-                      expertiseData[activeCategory].gradient
-                    } shadow-xl`}>
-                      <div className="text-white">
+                    <div className={`p-4 rounded-2xl bg-gradient-to-r ${expertiseData[activeCategory].gradient} shadow-xl`}>
+                      <div className="text-[#0a0a0a]">
                         {expertiseData[activeCategory].icon}
                       </div>
                     </div>
                     <div>
-                      <h4 className={`text-2xl font-bold mb-2 ${
-                        isDark ? 'text-white' : 'text-gray-900'
-                      }`}>
+                      <h4 className="text-2xl font-bold mb-2 text-[#faf8f0]">
                         {expertiseData[activeCategory].title}
                       </h4>
-                      <p className={`text-sm ${
-                        isDark ? 'text-gray-400' : 'text-gray-600'
-                      }`}>
+                      <p className="text-sm text-[#faf8f0]/60">
                         {expertiseData[activeCategory].description}
                       </p>
                     </div>
@@ -922,58 +806,44 @@ type ExpertiseKey = keyof typeof expertiseData;
                         whileHover={{ x: 5 }}
                         onMouseEnter={() => setHoveredTech(index as any)}
                         onMouseLeave={() => setHoveredTech(null)}
-                        className={`tech-card rounded-2xl p-6 backdrop-blur-sm border transition-all duration-300 cursor-pointer ${
-                          isDark 
-                            ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/30 border-gray-700 hover:border-gray-600' 
-                            : 'bg-gradient-to-br from-white/60 to-gray-100/60 border-gray-200 hover:border-gray-300'
-                        }`}
+                        className="tech-card rounded-2xl p-6 backdrop-blur-sm border transition-all duration-300 cursor-pointer bg-gradient-to-br from-[#111111]/50 to-[#0a0a0a]/30 border-[#faf8f0]/10 hover:border-[#faf8f0]/20"
                       >
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center gap-4">
-                            <div 
+                            <div
                               className="p-3 rounded-xl shadow-lg"
                               style={{ background: tech.color }}
                             >
-                              <div className="text-white">
+                              <div className="text-[#0a0a0a]">
                                 {tech.icon}
                               </div>
                             </div>
                             <div>
-                              <h5 className={`font-bold text-lg mb-1 ${
-                                isDark ? 'text-white' : 'text-gray-900'
-                              }`}>
+                              <h5 className="font-bold text-lg mb-1 text-[#faf8f0]">
                                 {tech.name}
                               </h5>
                               <div className="flex items-center gap-2">
-                                <span className={`px-2 py-1 rounded-full text-xs font-bold ${
-                                  isDark 
-                                    ? 'bg-gray-800 text-gray-300' 
-                                    : 'bg-gray-100 text-gray-700'
-                                }`}>
+                                <span className="px-2 py-1 rounded-full text-xs font-bold bg-[#111111] text-[#faf8f0]/70">
                                   {tech.category}
                                 </span>
                                 <span className={`px-2 py-1 rounded-full text-xs font-bold ${
-                                  tech.level === 'Expert' 
-                                    ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                                  tech.level === 'Expert'
+                                    ? 'bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/30'
                                     : tech.level === 'Advanced'
-                                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                                    : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                                    ? 'bg-[#3b82f6]/20 text-[#3b82f6] border border-[#3b82f6]/30'
+                                    : 'bg-[#f59e0b]/20 text-[#f59e0b] border border-[#f59e0b]/30'
                                 }`}>
                                   {tech.level}
                                 </span>
                               </div>
                             </div>
                           </div>
-                          <div className={`text-sm font-bold ${
-                            isDark ? 'text-gray-400' : 'text-gray-600'
-                          }`}>
+                          <div className="text-sm font-bold text-[#faf8f0]/60">
                             {tech.experience}
                           </div>
                         </div>
                         
-                        <p className={`text-sm mb-4 ${
-                          isDark ? 'text-gray-400' : 'text-gray-600'
-                        }`}>
+                        <p className="text-sm mb-4 text-[#faf8f0]/60">
                           {tech.description}
                         </p>
                         
@@ -981,11 +851,7 @@ type ExpertiseKey = keyof typeof expertiseData;
                           {tech.features.map((feature, i) => (
                             <span
                               key={i}
-                              className={`px-2 py-1 rounded-full text-xs ${
-                                isDark 
-                                  ? 'bg-gray-800 text-gray-300' 
-                                  : 'bg-gray-100 text-gray-700'
-                              }`}
+                              className="px-2 py-1 rounded-full text-xs bg-[#111111] text-[#faf8f0]/70"
                             >
                               {feature}
                             </span>
@@ -993,16 +859,12 @@ type ExpertiseKey = keyof typeof expertiseData;
                         </div>
                         
                         <div className="flex items-center justify-between">
-                          <div className={`text-xs font-bold px-3 py-1 rounded-full ${
-                            isDark 
-                              ? 'bg-gray-800 text-gray-300' 
-                              : 'bg-gray-100 text-gray-700'
-                          }`}>
+                          <div className="text-xs font-bold px-3 py-1 rounded-full bg-[#111111] text-[#faf8f0]/70">
                             {tech.projects}
                           </div>
                           <ChevronRight className={`w-4 h-4 transition-transform ${
                             hoveredTech === index ? 'translate-x-1' : ''
-                          } ${isDark ? 'text-gray-500' : 'text-gray-400'}`} />
+                          } text-[#faf8f0]/40`} />
                         </div>
                       </motion.div>
                     ))}
@@ -1021,25 +883,23 @@ type ExpertiseKey = keyof typeof expertiseData;
                   onClick={() => setActiveCategory(key as ExpertiseKey)}
                   className={`p-4 rounded-xl backdrop-blur-sm border text-center cursor-pointer transition-all duration-300 ${
                     activeCategory === key
-                      ? `bg-gradient-to-r ${category.gradient} text-white shadow-xl`
-                      : isDark
-                        ? 'bg-gray-800/60 border-gray-700 hover:bg-gray-800'
-                        : 'bg-white/60 border-gray-200 hover:bg-white'
+                      ? `bg-gradient-to-r ${category.gradient} text-[#0a0a0a] shadow-xl`
+                      : 'bg-[#111111]/60 border-[#faf8f0]/10 hover:bg-[#111111]/80'
                   }`}
                 >
                   <div className={`p-3 rounded-lg mb-3 inline-flex ${
-                    activeCategory === key 
-                      ? 'bg-white/20' 
+                    activeCategory === key
+                      ? 'bg-[#0a0a0a]/20'
                       : `bg-gradient-to-r ${category.gradient}`
                   }`}>
-                    <div className={activeCategory === key ? 'text-white' : 'text-white'}>
+                    <div className={activeCategory === key ? 'text-[#0a0a0a]' : 'text-[#0a0a0a]'}>
                       {category.icon}
                     </div>
                   </div>
                   <div className={`text-sm font-bold ${
-                    activeCategory === key 
-                      ? 'text-white' 
-                      : isDark ? 'text-gray-300' : 'text-gray-700'
+                    activeCategory === key
+                      ? 'text-[#0a0a0a]'
+                      : 'text-[#faf8f0]/70'
                   }`}>
                     {key.charAt(0).toUpperCase() + key.slice(1)}
                   </div>
@@ -1056,25 +916,17 @@ type ExpertiseKey = keyof typeof expertiseData;
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl backdrop-blur-xl border mb-6 ${
-            isDark 
-              ? 'bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-700/30' 
-              : 'bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200'
-          }`}>
-            <Sparkles className="w-5 h-5 text-purple-500" />
-            <span className={`text-sm font-bold ${
-              isDark ? 'text-purple-400' : 'text-purple-600'
-            }`}>
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl glass mb-6">
+            <Sparkles className="w-5 h-5 text-[#a78bfa]" />
+            <span className="text-sm font-bold text-[#a78bfa]">
               Ready to Collaborate?
             </span>
           </div>
           
-          <h3 className={`text-3xl font-bold mb-6 ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}>
-            Let's Build Something{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
-              Extraordinary
+          <h3 className="text-3xl font-bold mb-6 text-[#faf8f0]">
+            Let's Build Something{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a78bfa] to-[#ec4899]">
+              Amazing Together
             </span>
           </h3>
           
@@ -1085,14 +937,10 @@ type ExpertiseKey = keyof typeof expertiseData;
               const section = document.getElementById('Contact');
               if (section) section.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3 mx-auto relative overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, #8b5cf6, #ec4899)',
-              boxShadow: '0 20px 60px rgba(139, 92, 246, 0.3)'
-            }}
+            className="px-10 py-4 rounded-2xl font-bold text-lg text-[#0a0a0a] transition-all duration-300 flex items-center justify-center gap-3 mx-auto relative overflow-hidden bg-gradient-to-r from-[#a78bfa] to-[#ec4899] shadow-lg shadow-[#a78bfa]/30"
           >
-            <span className="relative z-10 text-white">Start a Project</span>
-            <ArrowRight className="w-5 h-5 text-white relative z-10" />
+            <span className="relative z-10">Start a Project</span>
+            <ArrowRight className="w-5 h-5 relative z-10" />
           </motion.button>
         </motion.div>
       </div>
@@ -1103,9 +951,36 @@ type ExpertiseKey = keyof typeof expertiseData;
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
         }
+        
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        
         .animate-gradient-x {
           background-size: 200% auto;
           animation: gradient-x 5s ease infinite;
+        }
+        
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        
+        /* Smooth scrolling */
+        html {
+          scroll-behavior: smooth;
+        }
+        
+        /* Selection styles */
+        ::selection {
+          background: rgba(167, 139, 250, 0.3);
+          color: #faf8f0;
         }
       `}</style>
     </section>
