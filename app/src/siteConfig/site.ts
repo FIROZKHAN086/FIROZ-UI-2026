@@ -7,7 +7,7 @@ export const siteConfig = {
   personal: {
     name: "Firoz",
     role: "Full-Stack Developer & Problem Solver",
-    email: "firoz.khan192006@gmail.com",
+    email: "firozkhan192006@gmail.com",
     phone: "+91 6377047189",
     location: "Jhunjhunu, Rajasthan, India",
     workingHours: "Monday - Saturday, 10:00 AM - 6:00 PM IST",

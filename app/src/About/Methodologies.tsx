@@ -3,13 +3,26 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   Palette, Layout, Cloud, CheckCircle, 
-  Sparkles, Rocket, Zap, TrendingUp, 
-  Shield, GitBranch, Database, Globe,
-  Layers, Cpu, Code2, Server
+  Sparkles, Rocket, Zap, TrendingUp, Code2
 } from 'lucide-react';
 import { useState, useRef } from 'react';
 
-const methodologies = [
+type Methodology = {
+  id: string;
+  title: string;
+  shortTitle: string;
+  description: string;
+  icon: React.ReactNode;
+  gradient: string;
+  bgGradient: string;
+  level: string;
+  levelColor: string;
+  progress: number;
+  points: { name: string; level: string; learned: boolean }[];
+  futureTopics: { name: string; priority: string; eta: string }[];
+};
+
+const methodologies : Methodology[] = [
   {
     id: 'design',
     title: 'UI/UX Design',
@@ -90,40 +103,54 @@ const methodologies = [
   }
 ];
 
-const SkillLevelBadge = ({ level, colorGradient }) => {
-  const colors = {
-    Beginner: 'from-gray-400 to-gray-500',
-    Intermediate: 'from-emerald-400 to-teal-500',
-    Advanced: 'from-blue-400 to-cyan-500',
-    Expert: 'from-purple-400 to-pink-500'
-  };
-  
+type Level = "Beginner" | "Intermediate" | "Advanced" | "Expert";
+
+const colors: Record<Level, string> = {
+  Beginner: "green",
+  Intermediate: "blue",
+  Advanced: "orange",
+  Expert: "red",
+};
+
+const SkillLevelBadge = ({
+  level,
+  colorGradient,
+}: {
+  level: Level;
+  colorGradient: string;
+}) => {
   return (
     <motion.span
       whileHover={{ scale: 1.05 }}
-      className={`px-2 py-0.5 rounded-full text-[10px] font-bold bg-linear-to-r ${colors[level] || colorGradient} text-white shadow-lg`}
+      className={`px-2 py-0.5 rounded-full text-[10px] font-bold bg-linear-to-r ${
+        colors[level] || colorGradient
+      } text-white shadow-lg`}
     >
       {level}
     </motion.span>
   );
 };
 
-const PriorityBadge = ({ priority }) => {
-  const colors = {
-    High: 'from-red-500 to-orange-500',
+type Priority = "High" | "Medium" | "Low";
+
+const colorsPriority: Record<Priority, string> = {
+ High: 'from-red-500 to-orange-500',
     Medium: 'from-yellow-500 to-amber-500',
     Low: 'from-green-500 to-emerald-500'
-  };
+};
+
+const PriorityBadge = ({ priority }: { priority: Priority }) => {
+ 
   
   return (
-    <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold bg-linear-to-r ${colors[priority]} text-white`}>
+    <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold bg-linear-to-r ${colorsPriority[priority]} text-white`}>
       {priority}
     </span>
   );
 };
 
-const Card = ({ method, index, isExpanded, onToggle }) => {
-  const cardRef = useRef(null);
+const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; index: number; isExpanded: boolean; onToggle: () => void }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ["start end", "end start"]
@@ -245,7 +272,7 @@ const Card = ({ method, index, isExpanded, onToggle }) => {
             </motion.span>
           </div>
           <div className="space-y-2">
-            {method.points.map((point, pointIndex) => (
+            {method.points.map((point: any, pointIndex: number) => (
               <motion.div
                 key={pointIndex}
                 initial={{ opacity: 0, x: -20 }}
@@ -301,7 +328,7 @@ const Card = ({ method, index, isExpanded, onToggle }) => {
             </div>
             
             <div className="space-y-3">
-              {method.futureTopics.map((topic, topicIndex) => (
+              {method.futureTopics.map((topic: any, topicIndex: number) => (
                 <motion.div
                   key={topicIndex}
                   initial={{ opacity: 0, x: -20 }}
@@ -346,8 +373,8 @@ const Card = ({ method, index, isExpanded, onToggle }) => {
 };
 
 export const Methodologies = () => {
-  const [expandedCard, setExpandedCard] = useState(null);
-  const containerRef = useRef(null);
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,

@@ -24,7 +24,7 @@ interface ProjectsSectionProps {
 
 export default function ProjectsSection({ initialProjects }: ProjectsSectionProps) {
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [hoveredCard, setHoveredCard] = useState<null>(null);
+ const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true,

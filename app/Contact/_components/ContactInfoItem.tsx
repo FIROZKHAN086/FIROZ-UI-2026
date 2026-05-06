@@ -6,6 +6,8 @@ import { FaPaperPlane } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+
+
 type ContactInfoItemProps = {
   icon: ReactNode;
   title: string;
@@ -14,6 +16,7 @@ type ContactInfoItemProps = {
   href?: string;
 };
 
+(gsap as any).registerPlugin(ScrollTrigger);
 export const ContactInfoItem = ({
   icon,
   title,
@@ -22,19 +25,16 @@ export const ContactInfoItem = ({
   href,
 }: ContactInfoItemProps) => {
   const itemRef = useRef<HTMLDivElement | null>(null);
-
+  
   useEffect(() => {
     if (!itemRef.current) return;
-
-    // ✅ register plugin safely (client only)
-    gsap.registerPlugin(ScrollTrigger);
-
+    
   gsap.fromTo(
-  itemRef.current,
-  { opacity: 0, 
+    itemRef.current,
+    { opacity: 0, 
     duration: 2,
     x: -50 },
-  {
+    {
       opacity: 1,
     x: 0,
     delay,
