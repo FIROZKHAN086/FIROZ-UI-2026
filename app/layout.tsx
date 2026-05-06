@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import {   Jost } from "next/font/google";
-import "./_Components/Style/globals.css";
-import Header from "./_Components/UI/Header";
-import Footer from "./_Components/UI/Footer";
-import { Cursor } from "./_Components/UI/Cursor";
+import { Jost } from "next/font/google";
+import "./src/Style/globals.css";
+import Header from "./src/UI/Header";
+import Footer from "./src/UI/Footer";
+import { Cursor } from "./src/UI/Cursor";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/next";
-
-
+import { ThemeProvider } from "./src/Theme/Theme";
 
 const jost = Jost({
   subsets: ["latin"],
@@ -31,18 +30,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="/firoz.png" />
       <meta name="theme-color" content="#0a0a0a" />
       <body
-        className={`${jost.variable} antialiased bg-[#0a0a0a] text-[#faf8f0]`}
+        className={`${jost.variable} antialiased bg-white dark:bg-[#0a0a0a] text-black dark:text-[#faf8f0] transition-colors duration-300`}
       >
-        <Toaster position="top-right" reverseOrder={false} />
-        <Analytics />
-        <Cursor />
-        <Header />
-        {children}
-        <Footer />
+        <ThemeProvider>
+          <Toaster position="top-right" reverseOrder={false} />
+          <Analytics />
+          <Cursor />
+          <Header />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
