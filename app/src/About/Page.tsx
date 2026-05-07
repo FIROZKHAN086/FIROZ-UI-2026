@@ -146,9 +146,22 @@ export default function AboutMe() {
   const containerRef = useRef(null);
 const { scrollYProgress } = useScroll();
 
-  const opacity = useTransform(scrollYProgress, [0, 0, 0.8, 0], [0, 1, 1, 1]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]);
-  const smoothScale = useSpring(scale, { stiffness: 100, damping: 30 });
+const opacity = useTransform(
+  scrollYProgress,
+  [0, 0.15],
+  [1, 1]
+);
+
+const scale = useTransform(
+  scrollYProgress,
+  [0, 0.2],
+  [0.9, 1]
+);
+
+const smoothScale = useSpring(scale, {
+  stiffness: 120,
+  damping: 25,
+});
 
   useEffect(() => {
     setMounted(true);
@@ -184,7 +197,7 @@ const { scrollYProgress } = useScroll();
     <section
       ref={containerRef}
       id="aboutt"
-      className="relative min-h-screen py-24  md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white dark:bg-[#0a0a0a] transition-colors duration-500"
+      className="relative min-h-screen py-4  md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white dark:bg-[#0a0a0a] transition-colors duration-500"
     >
     
       <motion.div 

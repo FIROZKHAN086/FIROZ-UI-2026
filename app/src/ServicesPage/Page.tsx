@@ -211,7 +211,7 @@ export function ServicesPage() {
       icon: <Cloud className="w-6 h-6" />,
       color: "from-[#3b82f6] to-[#06b6d4]",
       features: ["CI/CD Pipelines", "Docker & Kubernetes", "Cloud Hosting"],
-      tech: ["AWS", "Vercel", "Docker", "Actions", "Terraform"]
+      tech: ["AWS", "Render", "Docker", "Actions", "Terraform"]
     },
     {
       id: "seo",
@@ -229,7 +229,7 @@ export function ServicesPage() {
       icon: <Cpu className="w-6 h-6" />,
       color: "from-[#8b5cf6] to-[#d946ef]",
       features: ["LLM Integration", "Workflow Automation", "Predictive UX"],
-      tech: ["OpenAI", "LangChain", "Python", "Zapier"]
+      tech: ["OpenAI", "Gemini", "JavaScript", "Node.js"]
     }
   ];
 

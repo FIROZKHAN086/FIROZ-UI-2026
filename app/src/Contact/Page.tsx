@@ -14,7 +14,7 @@ const ContactCTA = () => {
   });
 
   // Parallax and Reveal transforms
-  const xLeft = useTransform(scrollYProgress, [0, 0.5], [-100, 0]);
+  const xLeft = useTransform(scrollYProgress, [0, 0.3], [100, 0]);
   const xRight = useTransform(scrollYProgress, [0, 0.5], [100, 0]);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const scale = useTransform(scrollYProgress, [0, 0.3], [0.8, 1]);
