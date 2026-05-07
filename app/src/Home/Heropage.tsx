@@ -295,24 +295,7 @@ const router = useRouter();
           </motion.div>
 
           {/* Tech Stack List (Mobile) */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-10 lg:hidden"
-          >
-            <p className="text-sm font-medium text-[#faf8f0]/40 mb-4 uppercase tracking-widest">Expertise</p>
-            <div className="flex flex-wrap gap-3">
-              {techStack.map((tech, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  className={`px-4 py-2 rounded-xl ${tech.bg} text-[#0a0a0a] text-xs font-bold shadow-lg flex items-center gap-2`}
-                >
-                  <tech.icon className="w-4 h-4" />
-                  <span>{tech.name}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+        
         </motion.div>
 
         {/* Right Content - Visual Elements */}

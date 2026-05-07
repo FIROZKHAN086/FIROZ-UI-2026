@@ -356,8 +356,7 @@ export default function Header() {
                   </motion.div>
                 </div>
                 <span className="text-sm text-[#faf8f0]/60 font-medium tracking-wide flex items-center gap-1">
-                  <FaRocket className="w-3 h-3 text-[#a78bfa]" />
-                  Full Stack Developer 
+                                    Full Stack Developer 
                 </span>
               </div>
             </div>
@@ -380,7 +379,7 @@ export default function Header() {
         {/* Desktop Right Side */}
         <div className="hidden lg:flex items-center gap-3">
           {/* Theme Toggle */}
-          <AnimatedThemeToggle />
+          {/* <AnimatedThemeToggle /> */}
 
           {/* Social Icons */}
           <div className="flex items-center gap-2 mr-2">
