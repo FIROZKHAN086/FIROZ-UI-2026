@@ -1,0 +1,140 @@
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { Sparkles, Quote, Star } from "lucide-react";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+
+interface Testimonial {
+  name: string;
+  role: string;
+  image: string;
+  content: string;
+  rating: number;
+  project: string;
+}
+
+interface TestimonialsShowProps {
+  initialTestimonials?: Testimonial[];
+}
+
+export default function TestimonialsShow({ initialTestimonials }: TestimonialsShowProps) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  
+  // Use initialTestimonials if provided
+  const displayTestimonials = initialTestimonials || [];
+  
+  useEffect(() => {
+    if (displayTestimonials.length === 0) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % displayTestimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [displayTestimonials.length]);
+
+  if (displayTestimonials.length === 0) return null;
+
+  return (
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0a0a0a]">
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="text-center mb-16 md:mb-24"
+        >
+          <div className="inline-flex items-center gap-2 mb-8">
+            <div className="w-8 h-px bg-linear-to-r from-transparent via-[#faf8f0]/30 to-transparent" />
+            <div className="px-4 py-2 rounded-full bg-[#111111]/50 border border-[#a78bfa]/30">
+              <Sparkles className="inline-block w-4 h-4 mr-2 text-[#a78bfa]" />
+              <span className="text-sm font-medium tracking-widest uppercase text-[#a78bfa]">
+                Testimonials
+              </span>
+            </div>
+            <div className="w-8 h-px bg-linear-to-r from-transparent via-[#faf8f0]/30 to-transparent" />
+          </div>
+
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <span className="text-[#faf8f0]">What Clients Say</span>
+            <span className="block mt-2 text-transparent bg-clip-text bg-linear-to-r from-[#a78bfa] via-[#ec4899] to-[#a78bfa]">
+              About My Work
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* Testimonials Card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="rounded-3xl p-8 md:p-12 glass border border-[#faf8f0]/10">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+                {/* Profile Image */}
+                <div className="flex-shrink-0">
+                  <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-[#a78bfa]/30">
+                    <img
+                      src={displayTestimonials[activeIndex].image}
+                      alt={displayTestimonials[activeIndex].name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 text-center md:text-left">
+                  <Quote className="w-8 h-8 text-[#a78bfa]/40 mb-4 mx-auto md:mx-0" />
+
+                  <p className="text-lg md:text-xl leading-relaxed mb-6 text-[#faf8f0]/80">
+                    "{displayTestimonials[activeIndex].content}"
+                  </p>
+
+                  {/* Rating */}
+                  <div className="flex items-center justify-center md:justify-start gap-1 mb-4">
+                    {[...Array(displayTestimonials[activeIndex].rating)].map((_, i) => (
+                      <FaStar key={i} className="w-4 h-4 text-[#f59e0b]" />
+                    ))}
+                  </div>
+
+                  {/* Author */}
+                  <div>
+                    <h4 className="text-lg font-bold text-[#faf8f0]">
+                      {displayTestimonials[activeIndex].name}
+                    </h4>
+                    <p className="text-sm text-[#faf8f0]/60">
+                      {displayTestimonials[activeIndex].role}
+                    </p>
+                    <span className="inline-block mt-2 px-3 py-1 rounded-full text-xs bg-[#a78bfa]/10 text-[#a78bfa] border border-[#a78bfa]/20">
+                      {displayTestimonials[activeIndex].project}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Dots */}
+        <div className="flex justify-center gap-2 mt-8">
+          {displayTestimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === activeIndex
+                  ? 'w-8 bg-linear-to-r from-[#a78bfa] to-[#ec4899]'
+                  : 'bg-[#faf8f0]/20 hover:bg-[#faf8f0]/40'
+              }`}
+              aria-label={`View testimonial ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
