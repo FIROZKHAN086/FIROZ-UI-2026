@@ -482,7 +482,7 @@ export default function Header() {
         {/* Mobile Controls */}
         <div className="lg:hidden flex items-center gap-2">
           {/* Theme Toggle in Mobile */}
-          <AnimatedThemeToggle />
+          {/* <AnimatedThemeToggle /> */}
 
           {/* Mobile Menu Button */}
           <motion.button

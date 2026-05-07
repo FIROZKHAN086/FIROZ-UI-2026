@@ -3,9 +3,11 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   Palette, Layout, Cloud, CheckCircle, 
-  Sparkles, Rocket, Zap, TrendingUp, Code2
+  Sparkles, Rocket, Zap, TrendingUp, Code2,
+  ChevronLeft, ChevronRight
 } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 
 type Methodology = {
   id: string;
@@ -46,8 +48,6 @@ const methodologies : Methodology[] = [
       { name: '3D Design Integration', priority: 'Medium', eta: 'Q2 2024' },
       { name: 'Voice UI Design', priority: 'Low', eta: 'Q3 2024' }
     ],
-   
-   
   },
   {
     id: 'development',
@@ -72,8 +72,6 @@ const methodologies : Methodology[] = [
       { name: 'Micro-frontends', priority: 'Medium', eta: 'Q2 2024' },
       { name: 'Edge Computing', priority: 'Low', eta: 'Q3 2024' }
     ],
-   
-   
   },
   {
     id: 'devops',
@@ -98,18 +96,16 @@ const methodologies : Methodology[] = [
       { name: 'Infrastructure as Code', priority: 'High', eta: 'Q1 2024' },
       { name: 'Serverless Architecture', priority: 'Medium', eta: 'Q2 2024' }
     ],
-   
-    
   }
 ];
 
 type Level = "Beginner" | "Intermediate" | "Advanced" | "Expert";
 
 const colors: Record<Level, string> = {
-  Beginner: "green",
-  Intermediate: "blue",
-  Advanced: "orange",
-  Expert: "red",
+  Beginner: "from-emerald-500 to-green-500",
+  Intermediate: "from-blue-500 to-cyan-500",
+  Advanced: "from-orange-500 to-amber-500",
+  Expert: "from-purple-500 to-pink-500",
 };
 
 const SkillLevelBadge = ({
@@ -122,7 +118,7 @@ const SkillLevelBadge = ({
   return (
     <motion.span
       whileHover={{ scale: 1.05 }}
-      className={`px-2 py-0.5 rounded-full text-[10px] font-bold bg-linear-to-r ${
+      className={`px-2 py-0.5 rounded-full text-[10px] font-bold bg-gradient-to-r ${
         colors[level] || colorGradient
       } text-white shadow-lg`}
     >
@@ -134,16 +130,14 @@ const SkillLevelBadge = ({
 type Priority = "High" | "Medium" | "Low";
 
 const colorsPriority: Record<Priority, string> = {
- High: 'from-red-500 to-orange-500',
-    Medium: 'from-yellow-500 to-amber-500',
-    Low: 'from-green-500 to-emerald-500'
+  High: 'from-red-500 to-orange-500',
+  Medium: 'from-yellow-500 to-amber-500',
+  Low: 'from-green-500 to-emerald-500'
 };
 
 const PriorityBadge = ({ priority }: { priority: Priority }) => {
- 
-  
   return (
-    <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold bg-linear-to-r ${colorsPriority[priority]} text-white`}>
+    <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold bg-gradient-to-r ${colorsPriority[priority]} text-white`}>
       {priority}
     </span>
   );
@@ -168,18 +162,18 @@ const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; in
       transition={{ duration: 0.6, delay: index * 0.1 }}
       viewport={{ once: false, amount: 0.3 }}
       whileHover={{ y: -8 }}
-      className="relative rounded-3xl overflow-hidden backdrop-blur-xl border bg-linear-to-br dark:from-[#111111]/80 dark:to-[#0a0a0a]/80 from-white/80 to-gray-50/80 dark:border-white/10 border-gray-200 shadow-2xl"
+      className="relative rounded-3xl overflow-hidden backdrop-blur-xl border bg-gradient-to-br dark:from-[#111111]/80 dark:to-[#0a0a0a]/80 from-white/80 to-gray-50/80 dark:border-white/10 border-gray-200 shadow-2xl"
     >
       {/* Animated Background Gradient */}
       <motion.div
-        className={`absolute inset-0 bg-linear-to-br ${method.bgGradient} opacity-0`}
+        className={`absolute inset-0 bg-gradient-to-br ${method.bgGradient} opacity-0`}
         whileHover={{ opacity: 0.5 }}
         transition={{ duration: 0.3 }}
       />
       
       {/* Glowing Border Effect */}
       <motion.div
-        className="absolute inset-0 rounded-3xl bg-linear-to-r from-transparent via-white/20 to-transparent"
+        className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/20 to-transparent"
         animate={{ x: ['-100%', '100%'] }}
         transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
       />
@@ -191,7 +185,7 @@ const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; in
             <motion.div
               whileHover={{ rotate: 360, scale: 1.1 }}
               transition={{ duration: 0.5 }}
-              className={`p-4 rounded-2xl bg-linear-to-br ${method.gradient} shadow-lg`}
+              className={`p-4 rounded-2xl bg-gradient-to-br ${method.gradient} shadow-lg`}
             >
               <div className="text-white">
                 {method.icon}
@@ -253,8 +247,6 @@ const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; in
           </motion.div>
         </div>
 
-      
-
         {/* Skills Section */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3">
@@ -266,7 +258,7 @@ const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; in
               initial={{ width: 0 }}
               whileInView={{ width: 'auto' }}
               transition={{ duration: 0.5 }}
-              className={`px-2 py-0.5 rounded-full text-[10px] font-bold bg-linear-to-r ${method.levelColor} text-white`}
+              className={`px-2 py-0.5 rounded-full text-[10px] font-bold bg-gradient-to-r ${method.levelColor} text-white`}
             >
               {method.level}
             </motion.span>
@@ -284,7 +276,7 @@ const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; in
                 <div className="flex items-center gap-2 flex-1">
                   <motion.div
                     whileHover={{ rotate: 360 }}
-                    className="p-0.5 rounded-full bg-linear-to-br from-[#10b981] to-[#06b6d4]"
+                    className="p-0.5 rounded-full bg-gradient-to-br from-[#10b981] to-[#06b6d4]"
                   >
                     <CheckCircle className="w-3 h-3 text-white" />
                   </motion.div>
@@ -313,7 +305,7 @@ const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; in
                 <motion.span
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="px-1.5 py-0.5 rounded-full text-[8px] font-bold bg-linear-to-r from-purple-500 to-pink-500 text-white"
+                  className="px-1.5 py-0.5 rounded-full text-[8px] font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white"
                 >
                   COMING SOON
                 </motion.span>
@@ -334,7 +326,7 @@ const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; in
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: topicIndex * 0.1 }}
-                  className="flex items-center justify-between p-2 rounded-lg bg-linear-to-r from-white/50 to-transparent dark:from-white/5"
+                  className="flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-white/50 to-transparent dark:from-white/5"
                 >
                   <div className="flex items-center gap-2">
                     <Zap className="w-3 h-3 text-yellow-500" />
@@ -347,8 +339,6 @@ const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; in
                 </motion.div>
               ))}
             </div>
-
-          
           </div>
         </motion.div>
 
@@ -358,22 +348,99 @@ const Card = ({ method, index, isExpanded, onToggle }: { method: Methodology; in
             whileHover={{ scale: 0.98 }}
             whileTap={{ scale: 0.95 }}
             onClick={onToggle}
-            className="w-full mt-4 py-2 rounded-xl text-sm font-medium bg-linear-to-r from-gray-100 to-gray-200 dark:from-white/10 dark:to-white/5 text-gray-700 dark:text-white/80 hover:shadow-lg transition-all"
+            className="w-full mt-4 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-gray-100 to-gray-200 dark:from-white/10 dark:to-white/5 text-gray-700 dark:text-white/80 hover:shadow-lg transition-all"
           >
             🔮 Explore Future Learning Path
           </motion.button>
         )}
 
         {/* Decorative Elements */}
-        <div className="absolute -top-10 -right-10 w-20 h-20 bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-2xl" />
-        <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-linear-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-2xl" />
+        <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-2xl" />
+        <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-2xl" />
       </div>
     </motion.div>
   );
 };
 
+// Mobile Carousel Component
+const MobileCarousel = ({ methodologies, expandedCard, setExpandedCard }: { 
+  methodologies: Methodology[]; 
+  expandedCard: number | null; 
+  setExpandedCard: (index: number | null) => void;
+}) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    align: 'center',
+    slidesToScroll: 1,
+  });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (emblaApi) {
+      setScrollSnaps(emblaApi.scrollSnapList());
+      emblaApi.on('select', () => {
+        setSelectedIndex(emblaApi.selectedScrollSnap());
+      });
+    }
+  }, [emblaApi]);
+
+  const scrollPrev = () => emblaApi && emblaApi.scrollPrev();
+  const scrollNext = () => emblaApi && emblaApi.scrollNext();
+
+  return (
+    <div className="relative">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex">
+          {methodologies.map((method, index) => (
+            <div key={method.id} className="flex-[0_0_85%] min-w-0 px-2 sm:flex-[0_0_70%] md:flex-[0_0_60%]">
+              <Card
+                method={method}
+                index={index}
+                isExpanded={expandedCard === index}
+                onToggle={() => setExpandedCard(expandedCard === index ? null : index)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {/* Navigation Buttons */}
+      <button
+        onClick={scrollPrev}
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-10 h-10 rounded-full bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 flex items-center justify-center hover:bg-purple-500/40 transition-all z-10"
+      >
+        <ChevronLeft className="w-5 h-5 text-purple-500" />
+      </button>
+      
+      <button
+        onClick={scrollNext}
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 w-10 h-10 rounded-full bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 flex items-center justify-center hover:bg-purple-500/40 transition-all z-10"
+      >
+        <ChevronRight className="w-5 h-5 text-purple-500" />
+      </button>
+      
+      {/* Dots Indicator */}
+      <div className="flex justify-center gap-2 mt-8">
+        {scrollSnaps.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => emblaApi && emblaApi.scrollTo(idx)}
+            className={`transition-all duration-300 ${
+              idx === selectedIndex
+                ? 'w-8 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full'
+                : 'w-2 h-2 bg-purple-500/30 rounded-full hover:bg-purple-500/50'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export const Methodologies = () => {
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -383,12 +450,21 @@ export const Methodologies = () => {
   
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div ref={containerRef} className="relative">
       {/* Animated Background */}
       <motion.div
         style={{ y: backgroundY }}
-        className="absolute inset-0 bg-linear-to-br from-purple-500/5 via-transparent to-blue-500/5 pointer-events-none"
+        className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 pointer-events-none"
       />
       
       {/* Section Header */}
@@ -400,8 +476,8 @@ export const Methodologies = () => {
       >
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: 1, ease: "linear" }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm mb-4"
+          transition={{ duration: 2,  ease: "linear" }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm mb-4"
         >
           <TrendingUp className="w-4 h-4 text-purple-500" />
           <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
@@ -409,7 +485,7 @@ export const Methodologies = () => {
           </span>
         </motion.div>
         
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-300 dark:to-white bg-clip-text text-transparent">
+        <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-300 dark:to-white bg-clip-text text-transparent">
           Methodology & Future Skills
         </h2>
         <p className="text-gray-600 dark:text-white/60 max-w-2xl mx-auto">
@@ -423,22 +499,37 @@ export const Methodologies = () => {
             <stop offset="0%" stopColor="#a78bfa" />
             <stop offset="100%" stopColor="#ec4899" />
           </linearGradient>
+          <linearGradient id="gradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#3b82f6" />
+            <stop offset="100%" stopColor="#06b6d4" />
+          </linearGradient>
+          <linearGradient id="gradGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#10b981" />
+            <stop offset="100%" stopColor="#06b6d4" />
+          </linearGradient>
         </defs>
       </svg>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {methodologies.map((method, index) => (
-          <Card
-            key={method.id}
-            method={method}
-            index={index}
-            isExpanded={expandedCard === index}
-            onToggle={() => setExpandedCard(expandedCard === index ? null : index)}
-          />
-        ))}
-      </div>
-
-     
+      {/* Responsive Layout */}
+      {isMobile ? (
+        <MobileCarousel 
+          methodologies={methodologies}
+          expandedCard={expandedCard}
+          setExpandedCard={setExpandedCard}
+        />
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {methodologies.map((method, index) => (
+            <Card
+              key={method.id}
+              method={method}
+              index={index}
+              isExpanded={expandedCard === index}
+              onToggle={() => setExpandedCard(expandedCard === index ? null : index)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
