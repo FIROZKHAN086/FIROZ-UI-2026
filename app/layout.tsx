@@ -17,7 +17,7 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "FIROZ Dev | Portfolio",
+  title: "FIROZ KHAN DEV.",
   description:
     "A modern portfolio showcasing my web development skills, real client testimonials, and high-quality projects built with React, Next.js, and TypeScript.",
   verification: {
