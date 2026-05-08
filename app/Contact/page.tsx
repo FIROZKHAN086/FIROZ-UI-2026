@@ -147,7 +147,7 @@ setLoading(true);
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-6xl font-black mb-8 tracking-tighter"
+            className="text-3xl sm:text-6xl font-black mb-8 tracking-tighter"
           >
             Let&apos;s Build Your <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#a78bfa] via-[#ec4899] to-[#a78bfa] animate-gradient-x">
@@ -176,7 +176,7 @@ setLoading(true);
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
-                  className="p-6 rounded-3xl bg-[#111111]/50 border border-[#faf8f0]/10 hover:border-[#a78bfa]/30 transition-all duration-300 group"
+                  className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#111111]/50 border border-[#faf8f0]/10 hover:border-[#a78bfa]/30 transition-all duration-300 group"
                 >
                   <info.icon className={`w-8 h-8 mb-4 ${info.color} group-hover:scale-110 transition-transform`} />
                   <h3 className="text-sm font-bold text-[#faf8f0]/40 uppercase tracking-widest mb-1">{info.label}</h3>
@@ -188,7 +188,7 @@ setLoading(true);
             </div>
 
             {/* Why Work With Me */}
-            <div className="p-8 rounded-3xl bg-linear-to-br from-[#111111] to-transparent border border-[#faf8f0]/10">
+            <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-linear-to-br from-[#111111] to-transparent border border-[#faf8f0]/10">
               <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                 <FaRocket className="text-[#ec4899]" /> Why Collaborate?
               </h3>
@@ -231,7 +231,7 @@ setLoading(true);
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="p-8 sm:p-10 rounded-[2.5rem] bg-[#111111] border border-[#faf8f0]/10 shadow-2xl relative"
+            className="p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-[#111111] border border-[#faf8f0]/10 shadow-2xl relative"
           >
             {/* Form Background Accent */}
             <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,#a78bfa,transparent)] rounded-[2.5rem]" />

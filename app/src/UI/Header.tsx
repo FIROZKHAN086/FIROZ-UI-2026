@@ -14,6 +14,7 @@ import { FiMail, FiGithub, FiLinkedin, FiFileText, FiHome, FiUser, FiBriefcase, 
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 import Link from "next/link";
 import { AnimatedThemeToggle } from "../Theme/Theme";
+import { lenisScrollTo } from "@/lib/scroll";
 
 const TechStack = () => {
   const [hoveredTech, setHoveredTech] = useState<number | null>(null);
@@ -247,8 +248,7 @@ export default function Header() {
   }, []);
 
   const scrollToSection = (id: string) => () => {
-    const section = document.getElementById(id);
-    if (section) section.scrollIntoView({ behavior: "smooth" });
+    lenisScrollTo(`#${id}`);
     setIsOpen(false);
   };
 
@@ -299,7 +299,7 @@ export default function Header() {
                 />
 
                 {/* Main logo */}
-                <div className="relative w-14 h-14 rounded-2xl
+                <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-2xl
                               bg-[#111111]
                               border-2 border-[#faf8f0]/10
                               flex items-center justify-center
@@ -314,7 +314,7 @@ export default function Header() {
                   />
 
                   {/* Tech icon */}
-                  <SiNextdotjs className="relative z-10 w-7 h-7 text-[#faf8f0]" />
+                  <SiNextdotjs className="relative z-10 w-5 h-5 sm:w-7 sm:h-7 text-[#faf8f0]" />
 
                   {/* Small floating particles */}
                   {[...Array(2)].map((_, i) => (
@@ -348,14 +348,14 @@ export default function Header() {
                   {/* Tech badge */}
                   <motion.div
                     whileHover={{ scale: 1.1 }}
-                    className="px-2 py-1 rounded-lg bg-[#a78bfa]/10 border border-[#a78bfa]/20"
+                    className="hidden sm:block px-2 py-1 rounded-lg bg-[#a78bfa]/10 border border-[#a78bfa]/20"
                   >
                     <span className="text-xs font-bold text-transparent bg-clip-text bg-linear-to-r from-[#a78bfa] to-[#ec4899]">
                       NEXT.js
                     </span>
                   </motion.div>
                 </div>
-                <span className="text-sm text-[#faf8f0]/60 font-medium tracking-wide flex items-center gap-1">
+                <span className="text-xs sm:text-sm text-[#faf8f0]/60 font-medium tracking-wide flex items-center gap-1 truncate max-w-[120px] sm:max-w-none">
                                     Full Stack Developer 
                 </span>
               </div>
@@ -551,6 +551,7 @@ export default function Header() {
 
             {/* Menu Panel */}
             <motion.div
+              data-lenis-prevent
               initial={{ opacity: 0, y: -50, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -50, scale: 0.95 }}

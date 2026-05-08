@@ -139,10 +139,21 @@ body {
   border: 1px solid rgba(250, 248, 240, 0.08);
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Adds offset for fixed headers */
+/* Lenis smooth scroll overrides */
+html.lenis {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 /* Improve text rendering */

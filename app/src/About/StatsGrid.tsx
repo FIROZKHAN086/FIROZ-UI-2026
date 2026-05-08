@@ -49,7 +49,7 @@ export const StatsGrid = () => {
           className="relative group"
         >
           <div
-            className="p-6 rounded-2xl backdrop-blur-xl border bg-[#111111]/50 border-[#faf8f0]/10"
+            className="p-4 sm:p-6 rounded-xl sm:rounded-2xl backdrop-blur-xl border bg-[#111111]/50 border-[#faf8f0]/10"
           >
             <div
               className={`inline-flex p-3 rounded-full mb-4 bg-linear-to-br ${stat.gradient}`}

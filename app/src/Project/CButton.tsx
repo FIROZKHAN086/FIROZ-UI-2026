@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Sparkles, ArrowRight } from 'lucide-react'
+import { lenisScrollTo } from "@/lib/scroll"
 
 const CButton = () => {
   
@@ -121,7 +122,7 @@ const CButton = () => {
     className="relative"
   >
     <motion.h3
-      className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-10 max-w-2xl relative z-10"
+      className="text-3xl sm:text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 sm:mb-10 max-w-2xl relative z-10"
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
@@ -194,8 +195,8 @@ const CButton = () => {
     whileTap={{ scale: 0.95 }}
   >
     <button
-      onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-      className="group relative px-10 py-8 bg-white text-black font-black text-xl rounded-2xl overflow-hidden cursor-pointer outline-none border-none"
+      onClick={() => lenisScrollTo('#contact')}
+      className="group relative px-6 sm:px-10 py-6 sm:py-8 bg-white text-black font-black text-base sm:text-xl rounded-2xl overflow-hidden cursor-pointer outline-none border-none"
     >
       {/* Animated Background  */}
       <motion.div

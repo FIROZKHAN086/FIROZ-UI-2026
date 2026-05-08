@@ -7,6 +7,7 @@ import { Cursor } from "./src/UI/Cursor";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "./src/Theme/Theme";
+import { SmoothScrollProvider } from "./src/UI/SmoothScroll";
 
 const jost = Jost({
   subsets: ["latin"],
@@ -41,7 +42,9 @@ export default function RootLayout({
           <Analytics />
           <Cursor />
           <Header />
-          {children}
+          <SmoothScrollProvider>
+            {children}
+          </SmoothScrollProvider>
           <Footer />
         </ThemeProvider>
       </body>
