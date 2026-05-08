@@ -11,6 +11,7 @@ import {
   ChevronRight, Sparkles, Zap, Code,
   Heart, ExternalLink, MessageSquare
 } from "lucide-react";
+import { lenisScrollTo } from "@/lib/scroll";
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -123,10 +124,10 @@ export default function Footer() {
       </div>
 
       {/* Main Content Area */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pb-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
         
         {/* Top Section: CTA */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16 lg:mb-24">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -197,7 +198,7 @@ export default function Footer() {
       
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 md:pt-12 border-t border-white/5 gap-6 md:gap-8">
           <div className="flex items-center gap-2 text-[#faf8f0] text-xs">
             <span>&copy; {new Date().getFullYear()} Firozkhan.site</span>
             <span>BUILDING IN THE OPEN.</span>
@@ -222,7 +223,7 @@ export default function Footer() {
           </motion.div>
 
           <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => lenisScrollTo(0)}
             className="group flex items-center gap-2 text-[#faf8f0] hover:text-white transition-colors text-xs font-bold tracking-widest uppercase"
           >
             Back to top 

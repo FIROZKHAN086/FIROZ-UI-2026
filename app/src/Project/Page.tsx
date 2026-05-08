@@ -123,7 +123,7 @@ export default function ProjectsSection({ initialProjects }: ProjectsSectionProp
             </span>
           </motion.div>
 
-          <motion.h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-4">
+          <motion.h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-4">
             <span className={isDark ? "text-white" : "text-gray-900"}>
               Featured{" "}
             </span>

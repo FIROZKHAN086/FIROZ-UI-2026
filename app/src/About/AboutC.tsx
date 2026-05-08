@@ -38,6 +38,7 @@ import {
   SiDocker,
   SiExpress,
 } from "react-icons/si";
+import { lenisScrollTo } from "@/lib/scroll";
 
 if (typeof window !== "undefined") {
   (gsap as any).registerPlugin(ScrollTrigger);
@@ -497,7 +498,7 @@ export const AboutC = () => {
               whileHover={{ y: -5 }}
               className="relative group"
             >
-              <div className="p-6 rounded-2xl backdrop-blur-xl border bg-[#111111]/50 border-[#faf8f0]/10">
+              <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl backdrop-blur-xl border bg-[#111111]/50 border-[#faf8f0]/10">
                 <div
                   className={`inline-flex p-3 rounded-full mb-4 bg-linear-to-br ${stat.gradient}`}
                 >
@@ -532,7 +533,7 @@ export const AboutC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
-              className="mb-12 rounded-3xl p-8 glass"
+              className="mb-12 rounded-2xl sm:rounded-3xl p-4 sm:p-8 glass"
             >
               <div className="flex items-center gap-4 mb-8">
                 <div className="p-4 rounded-2xl bg-linear-to-br from-[#a78bfa] to-[#ec4899] shadow-lg">
@@ -594,12 +595,12 @@ export const AboutC = () => {
                 <h4 className="text-lg font-bold mb-6 text-[#faf8f0]">
                   Development Process
                 </h4>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {processSteps.map((step, index) => (
                     <motion.div
                       key={index}
                       whileHover={{ scale: 1.05 }}
-                      className="p-4 rounded-xl border bg-[#111111]/50 border-[#faf8f0]/10"
+                      className="p-3 sm:p-4 rounded-xl border bg-[#111111]/50 border-[#faf8f0]/10"
                     >
                       <div className="text-sm font-bold mb-2 text-[#a78bfa]">
                         {step.step}
@@ -618,7 +619,7 @@ export const AboutC = () => {
             </motion.div>
 
             {/* Principles Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {principles.map((principle, index) => (
                 <motion.div
                   key={index}
@@ -703,7 +704,7 @@ export const AboutC = () => {
                 exit={{ opacity: 0, y: -20 }}
                 className="tech-cards mb-10"
               >
-                <div className="rounded-3xl p-8 glass">
+                <div className="rounded-2xl sm:rounded-3xl p-4 sm:p-8 glass">
                   <div className="flex items-center gap-4 mb-8">
                     <div
                       className={`p-4 rounded-2xl bg-linear-to-r ${expertiseData[activeCategory].gradient} shadow-xl`}
@@ -806,7 +807,7 @@ export const AboutC = () => {
             </AnimatePresence>
 
             {/* Quick Category Switch */}
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {Object.entries(expertiseData).map(([key, category]) => (
                 <motion.div
                   key={key}
@@ -875,10 +876,7 @@ export const AboutC = () => {
           <motion.button
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              const section = document.getElementById("Contact");
-              if (section) section.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={() => lenisScrollTo("#Contact")}
             className="px-10 py-4 rounded-2xl font-bold text-lg text-[#0a0a0a] transition-all duration-300 flex items-center justify-center gap-3 mx-auto relative overflow-hidden bg-linear-to-r from-[#a78bfa] to-[#ec4899] shadow-lg shadow-[#a78bfa]/30"
           >
             <span className="relative z-10">Start a Project</span>

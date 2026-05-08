@@ -21,7 +21,7 @@ export function ProjectModal({ project, isOpen, onClose }: { project: Project | 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-md"
         onClick={onClose}
       >
         <motion.div
@@ -30,7 +30,7 @@ export function ProjectModal({ project, isOpen, onClose }: { project: Project | 
           exit={{ scale: 0.9, opacity: 0, y: 50 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
           className={`
-            relative max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl
+            relative max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl
             ${currentTheme === "dark" 
               ? "bg-linear-to-br from-gray-900 to-gray-800" 
               : "bg-white"
@@ -46,7 +46,7 @@ export function ProjectModal({ project, isOpen, onClose }: { project: Project | 
             <X className="w-5 h-5" />
           </button>
 
-          <div className="relative h-64 md:h-96">
+          <div className="relative h-48 sm:h-64 md:h-96">
             {project.image ? (
               <NextImage
                 src={project.image}

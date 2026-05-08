@@ -13,6 +13,7 @@ import {
 } from 'react-icons/si';
 import { Journey } from './Journey';
 import { Methodologies } from './Methodologies';
+import { lenisScrollTo } from "@/lib/scroll";
 
 const expertiseData = {
   frontend: {
@@ -170,8 +171,7 @@ const smoothScale = useSpring(scale, {
   if (!mounted) return null;
 
   const scrollToContact = () => {
-    const section = document.getElementById('contact');
-    if (section) section.scrollIntoView({ behavior: 'smooth' });
+    lenisScrollTo('#contact');
   };
 
   const containerVariants = {
@@ -242,7 +242,7 @@ const smoothScale = useSpring(scale, {
       
 
         {/* Content Tabs: Philosophy & Expertise */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start mb-32">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-16 lg:mb-32">
           {/* Philosophy Section */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -281,12 +281,14 @@ const smoothScale = useSpring(scale, {
             </div>
           </motion.div>
 
-          {/* Expertise Tabs */}
+          {/*
+           Expertise Tabs 
+          */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-slate-50 dark:bg-[#111111]/50 p-8 rounded-4xl border border-slate-200 dark:border-white/5 backdrop-blur-xl"
+            className="bg-slate-50 dark:bg-[#111111]/50 p-4 sm:p-8 rounded-4xl border border-slate-200 dark:border-white/5 backdrop-blur-xl"
           >
             <div className="flex flex-wrap gap-2 mb-10">
               {(Object.keys(expertiseData) as ExpertiseKey[]).map((key) => (
@@ -353,8 +355,12 @@ const smoothScale = useSpring(scale, {
           </motion.div>
         </div>
 
-        {/* Methodologies & Journey Sections */}
-        <div className="space-y-32">
+       { /*
+|--------------------------------------------------------------------------
+| Methodologies & Journey Sections
+|--------------------------------------------------------------------------
+*/ }
+        <div className="space-y-16 lg:space-y-32">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -384,14 +390,14 @@ const smoothScale = useSpring(scale, {
           </motion.div>
         </div>
 
-        {/* Final CTA */}
+        
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-32 text-center"
+          className="mt-32 hidden md:block text-center"
         >
-          <div className="relative inline-block px-12 py-16 rounded-[3rem] bg-slate-900 dark:bg-white overflow-hidden shadow-2xl">
+          <div className="relative inline-block px-6 sm:px-12 py-10 sm:py-16 rounded-[2rem] sm:rounded-[3rem] bg-slate-900 dark:bg-white overflow-hidden shadow-2xl">
             {/* Background pattern */}
             <div className="absolute inset-0 opacity-10" style={{
               backgroundImage: 'radial-gradient(circle at 2px 2px, #a78bfa 1px, transparent 0)',

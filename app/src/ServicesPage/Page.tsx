@@ -23,6 +23,7 @@ import {
   Sparkles,
   Code,
 } from "lucide-react";
+import { lenisScrollTo } from "@/lib/scroll";
 
 // --- Types ---
 
@@ -81,7 +82,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className="group relative h-full bg-card/40 backdrop-blur-xl border border-border rounded-3xl p-8 overflow-hidden transition-colors hover:border-primary/50"
+      className="group relative h-full bg-card/40 backdrop-blur-xl border border-border rounded-2xl sm:rounded-3xl p-4 sm:p-8 overflow-hidden transition-colors hover:border-primary/50"
     >
       <div style={{ transform: "translateZ(50px)" }} className="relative z-10">
         <div className={`w-14 h-14 rounded-2xl bg-linear-to-br ${service.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
@@ -138,7 +139,7 @@ const ProcessTimeline = () => {
   ];
 
   return (
-    <div className="py-20 max-w-4xl hidden md:block mx-auto px-4">
+    <div className="py-20 hidden md:block max-w-4xl mx-auto px-4">
       <div className="text-center mb-16">
         <h2 className="text-3xl font-bold mb-4">My Workflow</h2>
         <p className="text-muted-foreground">A systematic approach to delivering excellence.</p>
@@ -146,7 +147,7 @@ const ProcessTimeline = () => {
 
       <div className="relative">
         {/* Progress Line */}
-        <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2" />
+        <div className="absolute left-6 sm:left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2" />
         
         {processes.map((step, i) => (
           <motion.div 
@@ -154,17 +155,17 @@ const ProcessTimeline = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            className={`relative flex items-center gap-8 mb-20 ${i % 2 === 0 ? "sm:flex-row-reverse" : ""}`}
+            className={`relative flex items-center gap-4 sm:gap-8 mb-12 sm:mb-20 ${i % 2 === 0 ? "sm:flex-row-reverse" : ""}`}
           >
             <div className="flex-1 hidden sm:block" />
             
-            <div className="relative z-10 w-16 h-16 rounded-full bg-card border-4 border-background flex items-center justify-center text-primary shadow-xl shrink-0">
+            <div className="relative z-10 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-card border-2 sm:border-4 border-background flex items-center justify-center text-primary shadow-xl shrink-0">
                {step.icon}
             </div>
 
-            <div className="flex-1 bg-card p-6 rounded-2xl border border-border shadow-sm">
-               <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-               <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+            <div className="flex-1 bg-card p-4 sm:p-6 rounded-2xl border border-border shadow-sm">
+               <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2">{step.title}</h3>
+               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
             </div>
           </motion.div>
         ))}
@@ -262,7 +263,7 @@ export function ServicesPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-6xl md:text-7xl font-black mb-8 tracking-tighter"
+            className="text-3xl sm:text-5xl md:text-7xl font-black mb-8 tracking-tighter"
           >
             Transforming Ideas into <br />
             <span className="gradient-text">Digital Reality</span>
@@ -293,54 +294,7 @@ export function ServicesPage() {
       {/* Process Section */}
       <ProcessTimeline />
 
-      {/* Final CTA */}
-      <div className="container mx-auto px-4 py-20">
-         <motion.div 
-           initial={{ opacity: 0, scale: 0.95 }}
-           whileInView={{ opacity: 1, scale: 1 }}
-           viewport={{ once: true }}
-           className="relative overflow-hidden bg-primary rounded-[3rem] p-12 sm:p-20 text-center text-primary-foreground shadow-2xl shadow-primary/20"
-         >
-            {/* CTA Background Pattern */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
-               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.4),transparent)]" />
-               <div className="w-full h-full bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
-            </div>
-
-            <div className="relative z-10 max-w-3xl mx-auto">
-               <h2 className="text-4xl sm:text-6xl font-black mb-8 tracking-tighter">
-                  Ready to Build Something <br /> Extraordinary?
-               </h2>
-               <p className="text-xl text-primary-foreground/80 mb-12">
-                  Let&apos;s collaborate to create a digital product that sets you apart from the competition.
-               </p>
-               
-               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="w-full sm:w-auto px-12 py-5 rounded-2xl bg-white text-black font-bold text-lg shadow-xl flex items-center justify-center gap-3 transition-transform"
-                  >
-                    Get Started <ArrowRight className="w-5 h-5" />
-                  </motion.button>
-               </div>
-            </div>
-         </motion.div>
-      </div>
-
-      {/* Floating Elements for SEO & Aesthetics */}
-      <footer className="sr-only">
-        <h2>Full Stack Developer Services</h2>
-        <p>I offer Frontend Development, Backend Architecture, Cloud Solutions, and SEO optimization.</p>
-        <ul>
-          <li>React & Next.js Development</li>
-          <li>Node.js & Express APIs</li>
-          <li>AWS & Cloud Infrastructure</li>
-          <li>Search Engine Optimization</li>
-        </ul>
-      </footer>
-    </section>
+     </section>
   );
 }
 

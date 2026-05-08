@@ -65,9 +65,9 @@ export const Journey = () => {
             `}>
               <motion.div
                 whileHover={{ y: -5 }}
-                className="relative overflow-hidden rounded-3xl border bg-slate-50 dark:bg-[#111111]/50 border-slate-200 dark:border-white/10"
+                className="relative overflow-hidden rounded-2xl sm:rounded-3xl border bg-slate-50 dark:bg-[#111111]/50 border-slate-200 dark:border-white/10"
               >
-                <div className="relative p-8">
+                <div className="relative p-4 sm:p-8">
                   <div className={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? 'lg:justify-end lg:flex-row-reverse' : ''}`}>
                     <div className={`p-3 rounded-xl bg-linear-to-br ${item.gradient}`}>
                       <div className="text-white">

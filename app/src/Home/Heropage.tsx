@@ -19,6 +19,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from './Button';
 import { useMemo } from "react";
+import { lenisScrollTo } from "@/lib/scroll";
 
 
 interface TechItem {
@@ -90,8 +91,7 @@ const router = useRouter();
   }, []);
 
    const scrollToContact = () => {
-    const section = document.getElementById('contact');
-    if (section) section.scrollIntoView({ behavior: 'smooth' });
+    lenisScrollTo('#contact');
   };
 
   const techStack: TechItem[] = [
@@ -236,7 +236,7 @@ const router = useRouter();
 
           <motion.h1
             variants={titleVariants}
-            className="mb-4 text-4xl font-extrabold md:text-5xl lg:text-7xl text-[#faf8f0] tracking-tight"
+            className="mb-4 text-3xl sm:text-4xl font-extrabold md:text-5xl lg:text-7xl text-[#faf8f0] tracking-tight"
           >
             Crafting{" "}
             <span className="relative inline-block">
@@ -311,7 +311,7 @@ const router = useRouter();
         
           className="relative z-40 order-1 mb-12 lg:order-2 lg:mb-0 flex justify-center lg:justify-end"
         >
-          <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px]">
+          <div className="relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px]">
 
             {/* Orbiting Rings with Scroll Interaction */}
             {[180, 220, 260].map((radius, index) => (
@@ -389,7 +389,7 @@ const router = useRouter();
               }}
               className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
             >
-              <div className="relative group">
+                <div className="relative group overflow-visible lg:overflow-visible">
                 {/* Glow behind profile */}
                 <div className="absolute -inset-4 rounded-full bg-linear-to-r from-[#a78bfa] to-[#ec4899] opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-500" />
 
@@ -409,7 +409,7 @@ const router = useRouter();
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 1.5 }}
-                  className="absolute -right-28 top-0 sm:-right-12 bg-[#111111]/90 backdrop-blur-md border border-white/10 p-3 rounded-2xl shadow-2xl"
+                  className="absolute -right-20 top-0 lg:-right-28 bg-[#111111]/90 backdrop-blur-md border border-white/10 p-2 sm:p-3 rounded-2xl shadow-2xl"
                 >
                   <div className="flex items-center gap-2">
                     <div className="p-2 rounded-lg bg-[#10b981]/20 text-[#10b981]">
@@ -426,7 +426,7 @@ const router = useRouter();
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 1.7 }}
-                  className="absolute  -left-28 bottom-0  bg-[#111111]/90 backdrop-blur-md border border-white/10 p-3 rounded-2xl shadow-2xl"
+                  className="absolute -left-20 bottom-0 lg:-left-28 bg-[#111111]/90 backdrop-blur-md border border-white/10 p-2 sm:p-3 rounded-2xl shadow-2xl"
                 >
                   <div className="flex items-center gap-2">
                     <div className="p-2 rounded-lg bg-[#3b82f6]/20 text-[#3b82f6]">
