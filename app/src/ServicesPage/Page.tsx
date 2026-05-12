@@ -1,6 +1,6 @@
 "use client";
 
-import React, { JSX, useRef } from "react";
+import React, { JSX} from "react";
 import {
   motion,
   useTransform,
@@ -12,7 +12,6 @@ import {
   Palette,
   Cloud,
   Search,
-  ArrowRight,
   CheckCircle,
   Layers,
   Cpu,
@@ -23,7 +22,6 @@ import {
   Sparkles,
   Code,
 } from "lucide-react";
-import { lenisScrollTo } from "@/lib/scroll";
 
 // --- Types ---
 

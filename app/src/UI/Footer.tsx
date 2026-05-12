@@ -1,15 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   FaGithub, FaInstagram, FaLinkedinIn,
-  FaTwitter, FaYoutube, FaHeart, FaRocket, FaArrowRight
+  FaTwitter, FaHeart, FaRocket
 } from "react-icons/fa";
-import {
-  Mail, Phone, MapPin, ArrowRight, Send,
-  ChevronRight, Sparkles, Zap, Code,
-  Heart, ExternalLink, MessageSquare
+import { ArrowRight, Send,
 } from "lucide-react";
 import { lenisScrollTo } from "@/lib/scroll";
 
@@ -55,20 +52,9 @@ export default function Footer() {
     }, 3000);
   };
 
-  const footerLinks = [
-    { label: "Home", href: "home" },
-    { label: "About", href: "about" },
-    { label: "Projects", href: "projects" },
-    { label: "Services", href: "services" },
-    { label: "Contact", href: "contact" },
-  ];
+ 
 
-  const socialLinks = [
-    { icon: <FaGithub />, href: "https://github.com/FIROZKHAN086", label: "GitHub", color: "#faf8f0" },
-    { icon: <FaInstagram />, href: "https://www.instagram.com/khan____0086/", label: "Instagram", color: "#E1306C" },
-    { icon: <FaLinkedinIn />, href: "https://linkedin.com", label: "LinkedIn", color: "#0077B5" },
-    { icon: <FaTwitter />, href: "https://twitter.com", label: "Twitter", color: "#1DA1F2" },
-  ];
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -81,10 +67,7 @@ export default function Footer() {
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
+
 
   return (
     <motion.footer
@@ -135,7 +118,7 @@ export default function Footer() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8 leading-none">
-              LET'S <span className="text-transparent bg-clip-text bg-linear-to-r from-[#a78bfa] to-[#ec4899]">CREATE</span> <br />
+              LET&apos;S <span className="text-transparent bg-clip-text bg-linear-to-r from-[#a78bfa] to-[#ec4899]">CREATE</span> <br />
               SOMETHING GREAT.
             </h2>
             <div className="flex flex-wrap gap-6">

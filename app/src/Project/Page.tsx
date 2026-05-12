@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Sparkles,
   ArrowRight,
@@ -44,8 +44,14 @@ export default function ProjectsSection({ initialProjects }: ProjectsSectionProp
   const isDark : boolean = theme === 'dark';
 
   // Use initialProjects if provided, otherwise fallback to local data (client-side)
-  const allProjects = initialProjects || projectsData;
-  const displayProjects: Project[] = allProjects.slice(0, 6);
+  const allProjects: Project[] = initialProjects || projectsData as Project[];
+ const displayProjects: Project[] = allProjects
+  .sort(
+    (a: Project, b: Project) =>
+      new Date(b.updatedAt).getTime() -
+      new Date(a.updatedAt).getTime()
+  )
+  .slice(0, 6);
 
   const { scrollYProgress } = useScroll();
 
@@ -93,7 +99,7 @@ export default function ProjectsSection({ initialProjects }: ProjectsSectionProp
         />
         <motion.div 
           style={{ y: backgroundY }}
-          className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-linear-to-l from-blue-500/20 via-cyan-500/20 to-transparent rounded-full blur-3xl"
+          className="absolute bottom-0 right-0 w-[600px] h-150 bg-linear-to-l from-blue-500/20 via-cyan-500/20 to-transparent rounded-full blur-3xl"
         />
         
         {/* Grid Pattern */}

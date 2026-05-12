@@ -7,4 +7,6 @@ export type Project = {
   tech: string[];
   liveDemo?: string;
   github?: string;
+  createdAt: string;
+ updatedAt: string;
 };

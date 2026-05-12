@@ -183,10 +183,7 @@ export default function ProjectsSection() {
       ref={containerRef}
       className={`
         min-h-screen relative overflow-hidden
-        ${currentTheme === "dark"
-          ? "bg-linear-to-b from-gray-950 via-gray-900 to-gray-950"
-          : "bg-linear-to-b from-gray-50 via-white to-gray-50"
-        }
+       bg-[#141212] py-20
       `}
     >
       {/* Animated Progress Bar */}
