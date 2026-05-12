@@ -6,69 +6,13 @@ import {
   FaBars,
   FaTimes,
   FaDownload,
-  FaRocket,
-  FaCode,
-  FaPalette
 } from "react-icons/fa";
 import { FiMail, FiGithub, FiLinkedin, FiFileText, FiHome, FiUser, FiBriefcase, FiSettings, FiGlobe } from "react-icons/fi";
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 import Link from "next/link";
-import { AnimatedThemeToggle } from "../Theme/Theme";
 import { lenisScrollTo } from "@/lib/scroll";
+import { useRouter } from "next/navigation";
 
-const TechStack = () => {
-  const [hoveredTech, setHoveredTech] = useState<number | null>(null);
-  const techs = [
-    { icon: SiNextdotjs, label: "Next.js", color: "text-white" },
-    { icon: SiTypescript, label: "TypeScript", color: "text-[#a78bfa]" },
-    { icon: SiTailwindcss, label: "Tailwind", color: "text-[#06b6d4]" },
-  ];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="hidden lg:flex items-center gap-2 ml-4"
-    >
-      <div className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#111111]/80 backdrop-blur-md border border-[#faf8f0]/10 shadow-lg">
-        <FaCode className="w-3 h-3 text-[#a78bfa] mr-1" />
-        <span className="text-xs font-semibold text-[#faf8f0]/60 mr-2">
-          Stack
-        </span>
-
-        {techs.map((tech, index) => (
-          <motion.div
-            key={tech.label}
-            className="relative"
-            onMouseEnter={() => setHoveredTech(index)}
-            onMouseLeave={() => setHoveredTech(null)}
-            whileHover={{ scale: 1.2, y: -2 }}
-          >
-            <tech.icon className={`w-5 h-5 ${tech.color} transition-all duration-300`} />
-
-            {/* Tooltip */}
-            <AnimatePresence>
-              {hoveredTech === index && (
-                <motion.div
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 5 }}
-                  className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2
-                           bg-[#111111]/90 backdrop-blur-md
-                           text-[#faf8f0] text-xs px-2 py-1 rounded whitespace-nowrap
-                           border border-[#faf8f0]/10 shadow-lg z-50"
-                >
-                  {tech.label}
-                  <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-[#111111]/90 rotate-45" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
-  );
-};
 
 type NavLinkProps = {
   to?: string;
@@ -79,7 +23,7 @@ type NavLinkProps = {
 
 const NavLink = ({ to, label, scrollTo, icon: Icon }: NavLinkProps) => {
   const [isHovered, setIsHovered] = useState(false);
-
+    const router = useRouter();
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -146,7 +90,7 @@ const NavLink = ({ to, label, scrollTo, icon: Icon }: NavLinkProps) => {
 
           {/* Text */}
           <span className="text-sm font-semibold text-[#faf8f0]/70 group-hover:text-[#faf8f0] transition-all duration-300">
-            <Link href={to ?? "/"}>{label}</Link>
+            <div onClick={()=>router.push(`${to}`)} >{label}</div>
           </span>
 
           {/* Hover indicator */}
@@ -170,10 +114,10 @@ type SocialIconProps = {
 
 const SocialIcon = ({ icon: Icon, href, label }: SocialIconProps) => {
   const [isHovered, setIsHovered] = useState(false);
-
+const router = useRouter();
   return (
     <motion.a
-      href={href}
+      onClick={()=>router.push(`${href}`)}
       target="_blank"
       rel="noopener noreferrer"
       whileHover={{ scale: 1.1, y: -2 }}
@@ -239,7 +183,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
-
+const router = useRouter();
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -262,7 +206,7 @@ export default function Header() {
 
   const socialLinks = [
     { icon: FiGithub, href: "https://github.com/FIROZKHAN086", label: "GitHub" },
-    { icon: FiLinkedin, href: "https://linkedin.com", label: "LinkedIn" },
+    { icon: FiLinkedin, href: "https://linkedin.com/in/firoz-khan-9376352a4", label: "LinkedIn" },
     { icon: FiMail, href: "mailto:firozkhan192006@gmail.com", label: "Email" },
   ];
 
@@ -390,8 +334,8 @@ export default function Header() {
 
           {/* Resume Button */}
           <motion.a
-            href="/resume.pdf"
-            download
+          onClick={()=>router.push("/resume.pdf")}
+           target="_balnk"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             className="px-5 py-3 rounded-xl font-semibold text-sm

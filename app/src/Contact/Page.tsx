@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import  { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaRocket, FaArrowRight, FaBolt } from "react-icons/fa";
 import { FiMousePointer } from "react-icons/fi";
