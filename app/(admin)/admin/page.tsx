@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FolderGit2, Star, Sparkles, TrendingUp } from 'lucide-react';
 import { Project } from '../types';
+import { useRouter } from 'next/navigation';
 
 const statIcons = [FolderGit2, Star, Sparkles, TrendingUp];
 
@@ -37,7 +38,17 @@ const cardVariants = {
 export default function AdminDashboard() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
+  // Check authentication
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("adminAuth");
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [router]);
+
+  // Load projects on mount
   useEffect(() => {
     fetchProjects();
   }, []);
