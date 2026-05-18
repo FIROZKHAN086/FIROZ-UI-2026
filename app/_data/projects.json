@@ -1,5 +1,5 @@
 [
-    {
+  {
     "id": "proj_d85e27356f1f4e51",
     "title": "FIROZ-PORTFOLIO",
     "description": "This is my port folio and this is best adn cool and aniamtion and theme and and aniamtion desing",
@@ -11,14 +11,16 @@
       "React",
       "Gsap",
       "Motion",
-      "Axios"
+      "Axios",
+      "Express",
+      "Node.js"
     ],
     "liveDemo": "https://firoz-dev.vercel.app/",
     "github": "https://github.com/FIROZKHAN086",
     "category": "Web Application",
-    "featured": false,
+    "featured": true,
     "createdAt": "2026-01-20T07:13:12.804Z",
-    "updatedAt": "2026-01-22T05:10:12.211Z"
+    "updatedAt": "2026-05-17T07:18:58.130Z"
   },
   {
     "id": "proj_01g7b3e4f5c8d9a2b",
@@ -150,5 +152,21 @@
     "github": "https://github.com/FIROZKHAN086?tab=repositories",
     "liveDemo": "https://zoapto.netlify.app/",
     "category": "Web Design"
+  },
+  {
+    "id": "proj_ae194793fbcd42b1",
+    "title": "img ",
+    "description": "jjnsdkjfndjfksdjfnjsd",
+    "category": "web this ",
+    "tech": [
+      "next  js",
+      "node js"
+    ],
+    "liveDemo": "https://firoz-dev.vercel.app/",
+    "github": "https://github.com/FIROZKHAN086?tab=repositories",
+    "featured": false,
+    "image": "/uploads/95de2609-8f64-41cc-a28c-083e259d5c67.jpg",
+    "createdAt": "2026-05-16T05:05:53.466Z",
+    "updatedAt": "2026-05-16T05:05:53.466Z"
   }
 ]
